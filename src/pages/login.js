@@ -45,7 +45,11 @@ export default function Login() {
                             <Link href={"/"} className="textoAzul">¿Olvidaste tu contraseña?</Link>
                         </div>
                         <div className="error">{errores}</div>
-                        <button className="azul">Iniciar Sesión</button>
+                    </div>
+                    <button className="azul">Iniciar Sesión</button>
+                    <div className="flexRow gapCampos center">
+                        <div>¿No tienes una cuenta?</div>
+                        <Link href={"/signup"} className="textoAzul">¡Registrate!</Link>
                     </div>
                 </form>
             </div>

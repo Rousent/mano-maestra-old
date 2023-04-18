@@ -80,7 +80,11 @@ export default function SignUp() {
                             <input id="confirmPassword" type="password" placeholder="Repita la contraseña" onChange={(e) => setConfirm(e.target.value)}/>
                         </div>
                         <div className="error">{errores}</div>
-                        <button className="azul">Iniciar Sesión</button>
+                    </div>
+                    <button className="azul">Registrarme</button>
+                    <div className="flexRow gapCampos center">
+                        <div>¿Ya tienes una cuenta?</div>
+                        <Link href={"/login"} className="textoAzul">¡Inicia Sesión!</Link>
                     </div>
                 </form>
             </div>

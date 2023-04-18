@@ -5,7 +5,7 @@ export default function Standby(){
     return (
         <div className="fondoForms">
             <div className="backdropFondo">
-                <div className="divFormLike formDelgado">
+                <div className="divFormLike fondo formDelgado">
                     <h2 className="textCenter">Confirmar correo electrónico</h2>
                     <div className="textCenter">Hemos enviado un correo de confirmación con un enlace a tu dirección de correo.</div>
                     <div className="textCenter">Acceda desde el enlace para terminar el registro.</div>

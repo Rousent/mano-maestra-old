@@ -9,23 +9,27 @@ export default function Standby( initialSession, user ){
 
     const createProfile = async () => {
         if (initialSession) {
-            const { error } = await supabase.from("perfiles").insert({
-                idUsuario: user.id,
-                nombres: user.user_metadata.nombres,
-                apellidoPaterno: user.user_metadata.apellidoPaterno,
-                apellidoMaterno: user.user_metadata.apellidoMaterno,
-                idRol: user.user_metadata.idRol,
-            })
-            const result = await supabase.from("estudiantes").insert({
-                idUsuario: user.id,
-                idNivel: 1,
-            })
-            if (error) {
-                alert(error.message)
-            } else if (result.error.message) {
-                alert(result.error.message)
-            } else {
-                alert("Usuario registrado con exito")
+            try {
+                const { error } = await supabase.from("perfiles").insert({
+                    idUsuario: user.id,
+                    nombres: user.user_metadata.nombres,
+                    apellidoPaterno: user.user_metadata.apellidoPaterno,
+                    apellidoMaterno: user.user_metadata.apellidoMaterno,
+                    idRol: user.user_metadata.idRol,
+                })
+                const result = await supabase.from("estudiantes").insert({
+                    idUsuario: user.id,
+                    idNivel: 1,
+                })
+                if (error) {
+                    alert(error.message)
+                } else if (result.error.message) {
+                    alert(result.error.message)
+                } else {
+                    alert("Usuario registrado con exito")
+                }
+            } catch(e) {
+                //
             }
         } else {
             alert("Hubo un error con la autenticación de su correo")
@@ -39,7 +43,7 @@ export default function Standby( initialSession, user ){
     return (
         <div className="fondoForms">
             <div className="backdropFondo">
-                <div className="divFormLike formDelgado">
+                <div className="divFormLike fondo formDelgado">
                     <h2 className="textCenter">Cuenta creada</h2>
                     <div className="textCenter">Su perfil ha sido completado, ya puede acceder a las funciones del sistema.</div>
                     <Link href={"/"} className="textCenter">Regresar a la pagina principal</Link>

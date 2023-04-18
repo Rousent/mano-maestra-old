@@ -1,10 +1,8 @@
 
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { BiMenu } from "react-icons/bi"
 import { MdOutlineAccountCircle } from "react-icons/md"
 import { BiLogOut } from "react-icons/bi"
-import { useState } from "react"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 
 export default function Navigation({ session }) {
@@ -35,16 +33,11 @@ function Botones() {
 }
 
 function Menu() {
-    
-    const [open, setOpen] = useState(false)
-    const profile = (open) ? (<Profile/>) : null
-    const logout = (open) ? (<LogOut/>) : null
 
     return (
         <div className="menuNavBar">
-            {logout}
-            {profile}
-            <BiMenu className="botonIcon" onClick={() => setOpen(!open)}/>
+            <LogOut/>
+            <Profile/>
         </div>
     )
 }
