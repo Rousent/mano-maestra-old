@@ -1,6 +1,6 @@
 
 import Navigation from "@/components/Navigation"
-import { FaLock } from "react-icons/fa"
+import Lesson from "@/components/Lesson"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 
 export default function LessonsPage({ initialSession, user }) {
@@ -12,24 +12,17 @@ export default function LessonsPage({ initialSession, user }) {
                 <h1>Titulo jijhikjhoijnoijhikjhnkjhkuhikjnlkho</h1>
                 <h2>Subtitulo okjhgkjfkhvkjnokjmnkhgkhjblk</h2>
             </div>
-            <div className="flexRow gap5 justifyBetween">
-                <div>Hola</div>
-                <div>Adios</div>
+            <div className="flexRow gap15 center">
+                <div className="gap1 contenedorLecciones">
+                    <Lesson titulo={"Hola"}/>
+                    <Lesson titulo={"Hola"}/>
+                </div>
+                <div className="progreso naranja">
+                    <h4 className="textCenter">Mi progreso</h4>
+                </div>
             </div>
         </div>
         </>
-    )
-}
-
-function LessonContainer({ user }) {
-    return(
-        <div></div>
-    )
-}
-
-function Lesson({}) {
-    return (
-        <div></div>
     )
 }
 

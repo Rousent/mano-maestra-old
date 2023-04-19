@@ -27,13 +27,13 @@ export default function Account({ initialSession, user }) {
 
 function Datos({ user }) {
 
-    const nivel = (user.nivel) ? <div className="fichaNaranja">Nivel {user.nivel}</div> : null
+    const nivel = (user.nivel) ? <div className="ficha naranja">{user.nivel}</div> : null
     
     return (
         <div className="flexCol gap1">
             <h2 className="textCenter formDelgado">Datos</h2>
             <div className="flexRow gap1 center">
-                <div className="fichaNaranja">{user.rol}</div>
+                <div className="ficha naranja">{user.rol}</div>
                 {nivel}
             </div>
             <div>Nombre: {user.nombres} {user.apellidoPaterno} {user.apellidoMaterno}</div>

@@ -36,7 +36,7 @@ export default function Login() {
             <div className="backdropFondo">
                 <img src="/img/logo.png" className="logoEnLogin"/>
                 <form onSubmit={handleSubmit} className="formDelgado">
-                    <h1>Inicio de Sesión</h1>
+                    <h2 className="textCenter">Inicio de Sesión</h2>
                     <div className="flexCol gapCampos">
                         <div className="flexCol">
                             <label htmlFor="email">Correo electrónico</label>
