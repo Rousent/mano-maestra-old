@@ -9,6 +9,10 @@
     opacity: 100%;
   }
 }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 :root {
   --azul: #2DA4FA;
@@ -371,4 +375,14 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
   gap: 1rem;
   border-radius: 0.5rem;
   padding: 2.5rem;
+}
+
+.loader {
+  border: 1rem solid gray; /* Light grey */
+  border-top: 1rem solid var(--azul); /* Blue */
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  animation: spin 2s linear infinite;
+  align-self: center;
 }

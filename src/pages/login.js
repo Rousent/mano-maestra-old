@@ -13,12 +13,15 @@ export default function Login() {
     const [password, setPassword] = useState()
     const [errores, setErrores] = useState()
 
+    const [boton, setBoton] = useState(<button className="azul">Iniciar Sesión</button>)
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrores(null)
         if (email && password) {
             const { error } = await supabase.auth.signInWithPassword({email: email, password: password})
             if (!error) {
+                setBoton(<div className="loader"/>)
                 router.push("/")
             } else {
                 setErrores(error.message)
@@ -46,7 +49,7 @@ export default function Login() {
                         </div>
                         <div className="error">{errores}</div>
                     </div>
-                    <button className="azul">Iniciar Sesión</button>
+                    {boton}
                     <div className="flexRow gapCampos center">
                         <div>¿No tienes una cuenta?</div>
                         <Link href={"/signup"} className="textoAzul">¡Registrate!</Link>

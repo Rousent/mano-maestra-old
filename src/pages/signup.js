@@ -9,6 +9,8 @@ export default function SignUp() {
     const supabase = useSupabaseClient()
     const router = useRouter()
 
+    const [boton, setBoton] = useState(<button className="azul">Registrarme</button>)
+
     const [nombres, setNombres] = useState()
     const [paterno, setPaterno] = useState()
     const [materno, setMaterno] = useState()
@@ -37,6 +39,7 @@ export default function SignUp() {
             if (password == confirm) {
                 const { error } = await supabase.auth.signUp(signUpData)
                 if (!error) {
+                    setBoton(<div className="loader"/>)
                     router.push("/signup/standby")
                 } else {
                     setErrores(error.message)
@@ -81,7 +84,7 @@ export default function SignUp() {
                         </div>
                         <div className="error">{errores}</div>
                     </div>
-                    <button className="azul">Registrarme</button>
+                    {boton}
                     <div className="flexRow gapCampos center">
                         <div>¿Ya tienes una cuenta?</div>
                         <Link href={"/login"} className="textoAzul">¡Inicia Sesión!</Link>
