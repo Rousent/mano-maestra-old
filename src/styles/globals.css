@@ -166,8 +166,11 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
   justify-content: center;
   align-items: center;
 }
+.p1 {
+  padding: 1rem;
+}
 .p40 {
-  padding: 10rem;
+  padding: 5rem 10rem;
 }
 .gap1 {
   gap: 1rem;
@@ -222,7 +225,11 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
   background-color: var(--azul);
 }
 .ficha {
-  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  align-self: center;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
   padding-left: 1.25rem;
@@ -451,7 +458,7 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
 .contenedorLecciones {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  height: fit-content;
   width: 50rem;
   border-radius: 2rem;
   padding: 1.5rem;
@@ -466,9 +473,30 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
   padding: 2.5rem;
 }
+.iconoNivel {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.itemsCenter {
+  align-items: center;
+}
+
 .widthFull {
   width: 100%;
+}
+
+
+/* Contenido de la Leccion */
+.pagina {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 2rem;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

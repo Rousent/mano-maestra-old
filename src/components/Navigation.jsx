@@ -14,8 +14,8 @@ export default function Navigation({ session }) {
             <nav className="navigationBar">
                 <div className="navigationLeftOptions">
                     <Link href="/" className="botonHome"/>
-                    <Link href="/">Para Empresas</Link>
-                    <Link href="/">Repositorio</Link>
+                    <Link href="/empresas">Para Empresas</Link>
+                    <Link href="/repositorio">Repositorio</Link>
                 </div>
                 {opciones}
             </nav>

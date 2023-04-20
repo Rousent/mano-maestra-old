@@ -8,7 +8,7 @@ export default function Lesson({ idLeccion, titulo, done }) {
 
     return (
         <Link href={"/lecciones/"+idLeccion} className="flexRow justifyBetween leccion">
-            <h4>{titulo}</h4>
+            <h4>Lección {titulo}</h4>
             {icono}
         </Link>
     )

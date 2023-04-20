@@ -134,15 +134,15 @@ function ModificarContraseña() {
             <div className="flexCol gapCampos">
                 <div>
                     <label htmlFor="current">Contraseña actual</label>
-                    <input id="current" placeholder="Inserte la contraseña actual" onChange={(e) => setActual(e.target.value)}/>
+                    <input id="current" type="password" placeholder="Inserte la contraseña actual" onChange={(e) => setActual(e.target.value)}/>
                 </div>
                 <div>
                     <label htmlFor="new">Nueva contraseña</label>
-                    <input id="new" placeholder="Inserte la nueva contraseña" onChange={(e) => setNueva(e.target.value)}/>
+                    <input id="new" type="password" placeholder="Inserte la nueva contraseña" onChange={(e) => setNueva(e.target.value)}/>
                 </div>
                 <div>
                     <label htmlFor="confirm">Confirmar contraseña</label>
-                    <input id="confirm" placeholder="Repita la nueva contraseña" onChange={(e) => setConfirmar(e.target.value)}/>
+                    <input id="confirm" type="password" placeholder="Repita la nueva contraseña" onChange={(e) => setConfirmar(e.target.value)}/>
                 </div>
                 <div className="error">{error}</div>
             </div>
