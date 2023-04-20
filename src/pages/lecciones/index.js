@@ -90,9 +90,13 @@ export const getServerSideProps = async (ctx) => {
             })
         })
         const basico = lecciones.data.filter(leccion => leccion.idNivel == 1)
+        basico.sort((x, y) => x.titulo.localeCompare(y.titulo))
         const intermedio = lecciones.data.filter(leccion => leccion.idNivel == 2)
+        intermedio.sort((x, y) => x.titulo.localeCompare(y.titulo))
         const avanzado = lecciones.data.filter(leccion => leccion.idNivel == 3)
+        avanzado.sort((x, y) => x.titulo.localeCompare(y.titulo))
         const empresas = lecciones.data.filter(leccion => leccion.idNivel == 4)
+        empresas.sort((x, y) => x.titulo.localeCompare(y.titulo))
         const lista = {basico, intermedio, avanzado, empresas}
         //
 

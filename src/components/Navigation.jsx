@@ -8,6 +8,8 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react"
 export default function Navigation({ session }) {
 
     const opciones = (session) ? (<Menu/>) : (<Botones/>)
+    const lecciones = (session) ? <Link href="/lecciones">Lecciones</Link> : null
+    const practica = (session) ? <Link href="/practica">Practica</Link> : null
 
     return (
         <div className="navigationGroup">
@@ -16,6 +18,8 @@ export default function Navigation({ session }) {
                     <Link href="/" className="botonHome"/>
                     <Link href="/empresas">Para Empresas</Link>
                     <Link href="/repositorio">Repositorio</Link>
+                    {lecciones}
+                    {practica}
                 </div>
                 {opciones}
             </nav>
