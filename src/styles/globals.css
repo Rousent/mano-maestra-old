@@ -1,5 +1,106 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply w-full h-full;
+}
+body {
+  @apply bg-fondo w-full h-full;
+}
+#__next {
+  @apply h-full;
+}
+
+h1 { @apply text-5xl font-bold; }
+h2 { @apply text-4xl font-semibold; }
+h3 { @apply text-3xl font-medium; }
+h4 { @apply text-2xl; }
+h5 { @apply text-xl; }
+h6 { @apply text-lg; }
+
+
+
+a {
+  @apply no-underline transition-all duration-150 hover:underline hover:text-lg;
+}
+label {
+  @apply w-full font-medium text-lg;
+}
+button {
+  @apply w-fit h-fit self-center border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg transition-all duration-150;
+}
+input, input[type=text], input[type=password], input[type=email], input[type=textarea] {
+  @apply flex w-full object-contain border-solid border-2 rounded-lg px-3 py-[0.1rem];
+}
+form {
+  @apply h-fit flex flex-col gap-6 bg-fondo rounded-lg p-10;
+}
+.buttonLike {
+  @apply w-fit h-fit border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg hover:no-underline transition-all duration-150;
+}
+
+.iconButton {
+  @apply w-16 h-16 p-2 rounded-lg transition-all duration-150 hover:cursor-pointer hover:bg-naranja hover:no-underline;
+}
+
+.cuentaButton {
+  @apply w-full h-fit border-none rounded-lg bg-fondo hover:text-base hover:bg-azul hover:shadow-none;
+}
+
+.slideSection {
+  @apply relative justify-center w-full h-full transition-all duration-500 hover:w-extendido;
+}
+
+.slideSection:hover p {
+  @apply block animate-unhidde;
+}
+
+.ficha {
+  @apply text-center flex flex-row w-fit self-center py-1 px-5 font-medium border-solid rounded-full border-2;
+}
+
+.loader {
+  border: 1rem solid var(--fondo);
+  border-top: 1rem solid var(--azul);
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  animation: spin 2s linear infinite;
+  justify-self: center;
+  align-self: center;
+}
+
+.error {
+  @apply text-rojo text-center;
+}
+/*
+
+.divFormLike {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 0.5rem;
+  padding: 2.5rem;
+}
+.menuCuenta {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  padding: 2.5rem;
+}
+
+.menuNavBar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 
 @keyframes unhidde {
   0% {
@@ -39,7 +140,7 @@ h1 {
   text-align: center;
 }
 
-/**/
+/*
 
 p {margin-bottom: 1rem;}
 
@@ -64,7 +165,7 @@ h5 {font-size: 1.25rem;}
 
 small, .text_small {font-size: 0.8rem;}
 
-/**/
+/*
 
 label {
   width: 100%;
@@ -128,19 +229,6 @@ input {
   height: 100%;
 }
 
-input, input[type=text], input[type=password], input[type=email], input[type=textarea] {
-  display: flex;
-  width: 100%;
-  object-fit: contain;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 0.5rem;
-  border-color: black;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
-}
 .flexRow {
   display: flex;
   flex-direction: row;
@@ -182,7 +270,7 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
   gap: 15rem;
 }
 
-/* Botones */
+/* Botones 
 .azul {
   background-color: var(--azul);
 }
@@ -224,24 +312,9 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
   cursor: pointer;
   background-color: var(--azul);
 }
-.ficha {
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  align-self: center;
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  font-weight: 500;
-  border-style: solid;
-  border-radius: 100rem;
-  border-width: 2px;
-}
 /*-------------------------*/
 
-/* Barra de Navegación */
+/* Barra de Navegación 
 .navigationGroup {
   top: 0px;
   position: sticky;
@@ -303,136 +376,11 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
   text-decoration: none;
   background-color: var(--naranja);
 }
+/*-------------------------*
+
 /*-------------------------*/
 
-/* Aprender y Practicar*/
-.slideSection {
-  position: relative;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  transition: all 500ms;
-}
-.slideSection:hover {
-  width: 500%;
-}
-.slideImage {
-  width: 100%;
-  height: 100%;
-  filter: brightness(40%);
-  object-fit: cover;
-  z-index: 0;
-}
-.slideText {
-  z-index: 10;
-  overflow: clip;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  inset: 0;
-  position: absolute;
-  justify-content: center;
-}
-.slideSelector {
-  display: flex;
-  gap: 4px;
-  width: 100%;
-  height: 40vw;
-}
-.tituloSlide {
-  font-size: 3.75rem;
-  line-height: 1;
-  font-weight: 900;
-  color: var(--fondo);
-  text-align: center;
-}
-.subtituloSlide {
-  display: none;
-  opacity: 0%;
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  font-weight: 600;
-  color: var(--fondo);
-  text-align: center;
-  transition: all 300ms;
-}
-.instruccionSlide {
-  display: none;
-  opacity: 0%;
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  text-decoration: underline;
-  color: var(--fondo);
-  text-align: center;
-  transition: all 300ms;
-}
-.slideSection:hover p {
-  display: block;
-  animation: unhidde 300ms ease-in 300ms 1 normal forwards;
-}
-/*-------------------------*/
-
-/* Login page */
-.fondoForms {
-  width: 100%;
-  height: 100%;
-  background-image: var(--placeholder);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-.backdropFondo {
-  display: flex;
-  gap: 10rem;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: brightness(40%);
-}
-.formGrueso {
-  width: 31.5rem;
-}
-.formDelgado {
-  width: 25rem;
-}
-.divFormLike {
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  border-radius: 0.5rem;
-  padding: 2.5rem;
-}
-.logoEnLogin {
-  width: 33.333333%;
-  height: fit-content;
-}
-
-.menuCuenta {
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding: 2.5rem;
-}
-
-.loader {
-  border: 1rem solid var(--fondo); /* Light grey */
-  border-top: 1rem solid var(--azul); /* Blue */
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  animation: spin 2s linear infinite;
-  justify-self: center;
-  align-self: center;
-}
-
-/* Lecciones */
+/* Lecciones *
 .leccion {
   width: 100%;
   height: fit-content;
@@ -491,7 +439,7 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
   width: 100%;
 }
 
-/* Contenido de la Leccion */
+/* Contenido de la Leccion *
 .pagina {
   display: flex;
   flex-direction: column;
@@ -512,3 +460,5 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
 .pLessonNav {
   padding: 0rem 5rem;
 }
+
+*/

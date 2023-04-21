@@ -7,7 +7,7 @@ export default function Lesson({ idLeccion, titulo, done }) {
     const icono = (done) ? <BsCheckCircle className="icoLec"/> : <BsFillPlayFill className="iconoLeccion"/>
 
     return (
-        <Link href={"/lecciones/"+idLeccion} className="flexRow justifyBetween leccion">
+        <Link href={"/lecciones/"+idLeccion} className="flex flex-row justify-between leccion">
             <h4>Lección {titulo}</h4>
             {icono}
         </Link>

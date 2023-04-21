@@ -8,16 +8,16 @@ import { useRouter } from "next/router"
 export default function Account({ initialSession, user }) {
 
     const [contenido, setContenido] = useState(<Datos user={user}/>)
-    const modificarDatos = (true) ? <div id="modificarDatos" className="botonOpciones textCenter" onClick={() => setContenido(<ModificarDatos user={user}/>)}>Modificar datos</div> : null
+    const modificarDatos = (true) ? <button id="modificarDatos" className="cuentaButton" onClick={() => setContenido(<ModificarDatos user={user}/>)}>Modificar datos</button> : null
 
     return (
         <>
         <Navigation session={initialSession}/>
-        <div className="flexRow p40 gap5">
-            <div className="menuCuenta naranja">
-                <div id="datos" className="botonOpciones textCenter" onClick={() => setContenido(<Datos user={user}/>)}>Datos de la cuenta</div>
+        <div className="flex flex-row p-40">
+            <div className="w-80 h-fit flex flex-col gap-4 p-10 rounded-lg bg-naranja">
+                <button id="datos" className="cuentaButton" onClick={() => setContenido(<Datos user={user}/>)}>Datos de la cuenta</button>
                 {modificarDatos}
-                <div id="modificarContraseña" className="botonOpciones textCenter" onClick={() => setContenido(<ModificarContraseña/>)}>Cambiar contraseña</div>
+                <button id="modificarContraseña" className="cuentaButton" onClick={() => setContenido(<ModificarContraseña/>)}>Cambiar contraseña</button>
             </div>
             {contenido}
         </div>
@@ -27,13 +27,13 @@ export default function Account({ initialSession, user }) {
 
 function Datos({ user }) {
 
-    const nivel = (user.nivel) ? <div className="ficha naranja">{user.nivel}</div> : null
+    const nivel = (user.nivel) ? <div className="ficha bg-naranja">{user.nivel}</div> : null
     
     return (
-        <div className="flexCol gap1">
-            <h2 className="textCenter formDelgado">Datos</h2>
-            <div className="flexRow gap1 center">
-                <div className="ficha naranja">{user.rol}</div>
+        <div className="flex flex-col gap-4 w-full items-center text-center">
+            <h2 className="text-center w-form-thin">Datos</h2>
+            <div className="flex flex-row gap-4 justify-center items-center">
+                <div className="ficha bg-naranja">{user.rol}</div>
                 {nivel}
             </div>
             <div>Nombre: {user.nombres} {user.apellidoPaterno} {user.apellidoMaterno}</div>
@@ -77,10 +77,10 @@ function ModificarDatos({ user }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2 className="textCenter formDelgado">Modificar Datos</h2>
-            <div className="textCenter">Rellena los campos que quieras modificar.<br/>Los campos vacios no se veran afectados.</div>
-            <div className="flexCol gapCampos">
+        <form className="w-full px-8 py-0 items-center" onSubmit={handleSubmit}>
+            <h2 className="text-center">Modificar Datos</h2>
+            <div className="text-center">Rellena los campos que quieras modificar.<br/>Los campos vacios no se veran afectados.</div>
+            <div className="flex flex-col gap-2 w-form-thin">
                 <div>
                     <label htmlFor="nombres">Nombre(s)</label>
                     <input id="nombres" placeholder="Ej. Luis Angel" onChange={(e) => setNombres(e.target.value)}/>
@@ -95,7 +95,7 @@ function ModificarDatos({ user }) {
                 </div>
                 <div className="error">{error}</div>
             </div>
-            <button className="azul">Enviar</button>
+            <button className="bg-azul">Enviar</button>
         </form>
     )
 }
@@ -129,9 +129,9 @@ function ModificarContraseña() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2 className="textCenter formDelgado">Cambiar contraseña</h2>
-            <div className="flexCol gapCampos">
+        <form className="w-full px-8 py-0 items-center" onSubmit={handleSubmit}>
+            <h2 className="text-center w-form-thin">Cambiar contraseña</h2>
+            <div className="flex flex-col w-form-thin gap-2">
                 <div>
                     <label htmlFor="current">Contraseña actual</label>
                     <input id="current" type="password" placeholder="Inserte la contraseña actual" onChange={(e) => setActual(e.target.value)}/>
@@ -146,7 +146,7 @@ function ModificarContraseña() {
                 </div>
                 <div className="error">{error}</div>
             </div>
-            <button className="azul">Enviar</button>
+            <button className="bg-azul">Enviar</button>
         </form>
     )
 }
