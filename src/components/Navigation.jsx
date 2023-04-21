@@ -12,26 +12,24 @@ export default function Navigation({ session }) {
     const practica = (session) ? <Link href="/practica">Practica</Link> : null
 
     return (
-        <div className="navigationGroup">
-            <nav className="navigationBar">
-                <div className="navigationLeftOptions">
-                    <Link href="/" className="botonHome"/>
-                    <Link href="/empresas">Para Empresas</Link>
-                    <Link href="/repositorio">Repositorio</Link>
-                    {lecciones}
-                    {practica}
-                </div>
-                {opciones}
-            </nav>
-        </div>
+        <nav className="top-0 sticky z-50 flex bg-fondo h-24 justify-between items-center border-solid border-2 px-5 shadow-lg">
+            <div className="flex items-center gap-12">
+                <Link href="/" className="w-36 h-16 bg-logo bg-contain bg-no-repeat bg-center transition-all duration-150 hover:w-40 hover:h-20"/>
+                <Link href="/empresas">Para Empresas</Link>
+                <Link href="/repositorio">Repositorio</Link>
+                {lecciones}
+                {practica}
+            </div>
+            {opciones}
+        </nav>
     )
 }
 
 function Botones() {
     return (
-        <div>
-            <Link href="/login" className="botonLike fondo margin-right-2">Acceder</Link>
-            <Link href="/signup" className="botonLike azul">Registrarse</Link>
+        <div className="flex items-center gap-6 mr-8">
+            <Link href="/login" className="buttonLike bg-fondo">Acceder</Link>
+            <Link href="/signup" className="buttonLike bg-azul">Registrarse</Link>
         </div>
     )
 }
@@ -39,7 +37,7 @@ function Botones() {
 function Menu() {
 
     return (
-        <div className="menuNavBar">
+        <div className="flex items-center gap-6 mr-8">
             <LogOut/>
             <Profile/>
         </div>
@@ -49,7 +47,7 @@ function Menu() {
 function Profile() {
     return (
         <Link href={"/cuenta"}>
-            <MdOutlineAccountCircle className="botonIcon"/>
+            <MdOutlineAccountCircle className="iconButton"/>
         </Link>
     )
 }
@@ -63,5 +61,5 @@ function LogOut() {
         router.push("/")
     }
 
-    return <BiLogOut onClick={handleClick} className="botonIcon"/>
+    return <BiLogOut id="logout" onClick={handleClick} className="iconButton"/>
 }

@@ -7,19 +7,19 @@ export default function LessonsPage({ initialSession, user, lecciones }) {
     return (
         <>
         <Navigation session={initialSession}/>
-        <div className="flexCol gap5 p40">
-            <div className="flexCol gap1">
-                <h1>Titulo jijhikjhoijnoijhikjhnkjhkuhikjnlkho</h1>
-                <h2>Subtitulo okjhgkjfkhvkjnokjmnkhgkhjblk</h2>
+        <div className="flex flex-col gap-20 py-20 px-40">
+            <div className="flex flex-col gap-4">
+                <h1 className="text-center">Titulo jijhikjhoijnoijhikjhnkjhkuhikjnlkho</h1>
+                <h2 className="text-center">Subtitulo okjhgkjfkhvkjnokjmnkhgkhjblk</h2>
             </div>
-            <div className="flexRow center">
+            <div className="flex flex-row justify-center items-center">
                 <Contenido lecciones={lecciones} user={user}/>
-                <div className="progreso naranja">
-                    <h4 className="textCenter">Yo:</h4>
-                    <div className="flexCol gap1">
-                        <div className="ficha fondo">{user.nombres} {user.apellidoPaterno} {user.apellidoMaterno}</div>
-                        <div className="ficha fondo">{user.rol}</div>
-                        <div className="ficha fondo">{user.nivel}</div>
+                <div className="p-10 rounded-lg bg-naranja">
+                    <h4 className="text-center font-medium mb-2">Yo:</h4>
+                    <div className="flex flex-col gap-4">
+                        <div className="ficha bg-fondo">{user.nombres} {user.apellidoPaterno} {user.apellidoMaterno}</div>
+                        <div className="ficha bg-fondo">{user.rol}</div>
+                        <div className="ficha bg-fondo">{user.nivel}</div>
                     </div>
                 </div>
             </div>

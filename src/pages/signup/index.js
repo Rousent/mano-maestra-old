@@ -9,7 +9,7 @@ export default function SignUp() {
     const supabase = useSupabaseClient()
     const router = useRouter()
 
-    const [boton, setBoton] = useState(<button className="azul">Registrarme</button>)
+    const [boton, setBoton] = useState(<button className="bg-azul">Registrarme</button>)
 
     const [nombres, setNombres] = useState()
     const [paterno, setPaterno] = useState()
@@ -54,40 +54,40 @@ export default function SignUp() {
     }
 
     return (
-        <div className="fondoForms">
-            <div className="backdropFondo">
-                <form onSubmit={handleSubmit} className="formDelgado">
-                    <h1>Registro</h1>
-                    <div className="flexCol gapCampos">
-                        <div className="flexCol">
+        <div className="w-full h-full bg-placeholder bg-no-repeat bg-cover bg-center">
+            <div className="flex gap-40 w-full h-full justify-center items-center backdrop-brightness-40">
+                <form onSubmit={handleSubmit} className="w-form">
+                    <h1 className="text-center">Registro</h1>
+                    <div className="flex flex-col gap-2">
+                        <div className="flex flex-col">
                             <label htmlFor="nombres">Nombre(s)</label>
                             <input id="nombres" placeholder="Ej. Luis Angel" onChange={(e) => setNombres(e.target.value)}/>
                         </div>
-                        <div className="flexCol">
+                        <div className="flex flex-col">
                             <label>Apellidos</label>
-                            <div className="flexRow gapCampos">
+                            <div className="flex flex-row gap-2">
                                 <input id="apellidoPaterno" placeholder="Paterno" onChange={(e) => setPaterno(e.target.value)}/>
                                 <input id="apellidoMaterno" placeholder="Materno" onChange={(e) => setMaterno(e.target.value)}/>
                             </div>
                         </div>
-                        <div className="flexCol">
+                        <div className="flex flex-col">
                             <label htmlFor="email">Correo electrónico</label>
                             <input id="email" type="email" placeholder="Ej. nombre@correo.com" onChange={(e) => setEmail(e.target.value)}/>
                         </div>
-                        <div className="flexCol">
+                        <div className="flex flex-col">
                             <label htmlFor="password">Contraseña</label>
                             <input id="password" type="password" placeholder="Inserte contraseña" onChange={(e) => setPassword(e.target.value)}/>
                         </div>
-                        <div className="flexCol">
+                        <div className="flex flex-col">
                             <label htmlFor="confirmPassword">Confirmar Contraseña</label>
                             <input id="confirmPassword" type="password" placeholder="Repita la contraseña" onChange={(e) => setConfirm(e.target.value)}/>
                         </div>
                         <div className="error">{errores}</div>
                     </div>
                     {boton}
-                    <div className="flexRow gapCampos center">
+                    <div className="flex flex-row gap-2 justify-center items-center">
                         <div>¿Ya tienes una cuenta?</div>
-                        <Link href={"/login"} className="textoAzul">¡Inicia Sesión!</Link>
+                        <Link href={"/login"} className="underline decoration-azul">¡Inicia Sesión!</Link>
                     </div>
                 </form>
             </div>
