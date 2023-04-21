@@ -8,16 +8,16 @@ import { useRouter } from "next/router"
 export default function Account({ initialSession, user }) {
 
     const [contenido, setContenido] = useState(<Datos user={user}/>)
-    const modificarDatos = (true) ? <div className="botonOpciones textCenter" onClick={() => setContenido(<ModificarDatos user={user}/>)}>Modificar datos</div> : null
+    const modificarDatos = (true) ? <div id="modificarDatos" className="botonOpciones textCenter" onClick={() => setContenido(<ModificarDatos user={user}/>)}>Modificar datos</div> : null
 
     return (
         <>
         <Navigation session={initialSession}/>
         <div className="flexRow p40 gap5">
             <div className="menuCuenta naranja">
-                <div className="botonOpciones textCenter" onClick={() => setContenido(<Datos user={user}/>)}>Datos de la cuenta</div>
+                <div id="datos" className="botonOpciones textCenter" onClick={() => setContenido(<Datos user={user}/>)}>Datos de la cuenta</div>
                 {modificarDatos}
-                <div className="botonOpciones textCenter" onClick={() => setContenido(<ModificarContraseña/>)}>Cambiar contraseña</div>
+                <div id="modificarContraseña" className="botonOpciones textCenter" onClick={() => setContenido(<ModificarContraseña/>)}>Cambiar contraseña</div>
             </div>
             {contenido}
         </div>

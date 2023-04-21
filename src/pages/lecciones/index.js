@@ -12,7 +12,7 @@ export default function LessonsPage({ initialSession, user, lecciones }) {
                 <h1>Titulo jijhikjhoijnoijhikjhnkjhkuhikjnlkho</h1>
                 <h2>Subtitulo okjhgkjfkhvkjnokjmnkhgkhjblk</h2>
             </div>
-            <div className="flexRow gap15 center">
+            <div className="flexRow center">
                 <Contenido lecciones={lecciones} user={user}/>
                 <div className="progreso naranja">
                     <h4 className="textCenter">Yo:</h4>
