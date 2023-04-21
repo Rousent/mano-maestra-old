@@ -12,11 +12,11 @@ export default function LessonsPage({ initialSession, user, lecciones }) {
                 <h1 className="text-center">Titulo jijhikjhoijnoijhikjhnkjhkuhikjnlkho</h1>
                 <h2 className="text-center">Subtitulo okjhgkjfkhvkjnokjmnkhgkhjblk</h2>
             </div>
-            <div className="flex flex-row justify-center items-center">
+            <div className="flex flex-row w-fit self-center gap-10 justify-center">
                 <Contenido lecciones={lecciones} user={user}/>
-                <div className="p-10 rounded-lg bg-naranja">
+                <div className="flex flex-col p-10 rounded-lg bg-naranja w-fit h-fit">
                     <h4 className="text-center font-medium mb-2">Yo:</h4>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
                         <div className="ficha bg-fondo">{user.nombres} {user.apellidoPaterno} {user.apellidoMaterno}</div>
                         <div className="ficha bg-fondo">{user.rol}</div>
                         <div className="ficha bg-fondo">{user.nivel}</div>
@@ -30,7 +30,7 @@ export default function LessonsPage({ initialSession, user, lecciones }) {
 
 function Contenido({ lecciones, user }) {
     return (
-        <div className="flexCol gap1">
+        <div className="flex flex-col shrink-0 max-w-5xl w-full min-w-fit min-h-fit gap-4">
             <LessonContainer indice={1} user={user} nivel={"Nivel Basico"} lecciones={lecciones.basico} />
             <LessonContainer indice={2} user={user} nivel={"Nivel Intermedio"} lecciones={lecciones.intermedio} />
             <LessonContainer indice={3} user={user} nivel={"Nivel Avanzado"} lecciones={lecciones.avanzado} />

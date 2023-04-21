@@ -9,7 +9,7 @@ export default function LessonContainer({ nivel, lecciones, indice, user }) {
     const [open, setOpen] = useState(false)
 
     const desbloqueado = (indice <= user.valorNivel) ? true : false
-    const icono = (!desbloqueado) ? <FaLock className="iconoNivel"/> : (open) ? <FaChevronUp className="iconoNivel"/> : <FaChevronDown className="iconoNivel"/>
+    const icono = (!desbloqueado) ? <FaLock className="w-8 h-8 mr-4"/> : (open) ? <FaChevronUp className="w-8 h-8 mr-4"/> : <FaChevronDown className="w-8 h-8 mr-4"/>
     const lessons = lecciones.map((leccion) => (<Lesson idLeccion={leccion.idLeccion} titulo={leccion.titulo} done={leccion.done}/>))
     const contenido = (open) ? lessons : null
 
@@ -20,12 +20,12 @@ export default function LessonContainer({ nivel, lecciones, indice, user }) {
     }
 
     return (
-        <div onClick={handleClick} className="flexCol contenedorLecciones">
-            <div className="flexRow justifyBetween itemsCenter">
-                <h3 className="p1">{nivel}</h3>
+        <div onClick={handleClick} className="flex flex-col p-6 bg-naranja rounded-3xl hover:cursor-pointer">
+            <div className="flex flex-row justify-between items-center">
+                <h3 className="p-4">{nivel}</h3>
                 {icono}
             </div>
-            <div className="flexCol gap1">
+            <div className="flex flex-col gap-4">
                 {contenido}
             </div>
         </div>

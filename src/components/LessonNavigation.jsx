@@ -19,7 +19,7 @@ export default function LessonNavigation({ anterior=false, actual, user, siguien
     const linkNext = (siguiente) ? <Link className="lessonNavigation" onClick={completarLeccion} href={"/lecciones/"+siguiente}>Siguiente Lección</Link> : <Link className="lessonNavigation" onClick={completarLeccion} href={"/lecciones"}>Regresar a Lecciones</Link>
 
     return (
-        <div className="flexRow justifyBetween pLessonNav">
+        <div className="flex flex-row justify-between px-20">
             {linkBack}
             {linkNext}
         </div>

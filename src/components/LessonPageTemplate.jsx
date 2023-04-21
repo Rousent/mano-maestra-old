@@ -6,9 +6,9 @@ export default function LessonPageTemplate({ initialSession, user, actual, anter
     return (
         <>
         <Navigation session={initialSession}/>
-        <div className="flexCol p40 gap1">
+        <div className="flex flex-col p-40 gap-4">
             <LessonNavigation user={user} actual={actual} anterior={anterior} siguiente={siguiente}/>
-            <div className="pagina gap1 textCenter center">
+            <div className="flex flex-col p-8 rounded-3xl bg-blanco shadow-2xl gap-4 text-center justify-center items-center">
                 {children}
             </div>
             <LessonNavigation user={user} actual={actual} anterior={anterior} siguiente={siguiente}/>
