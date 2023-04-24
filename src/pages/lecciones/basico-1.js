@@ -1,12 +1,16 @@
 
 import LessonPageTemplate from "@/components/LessonPageTemplate";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import CameraAccess from "@/components/CameraAccess";
 
 export default function Page({ initialSession, user }) {
 
+    const titulo = "1. Abecedario"
+
     return (
-        <LessonPageTemplate initialSession={initialSession} user={user} actual={"basico-1"} siguiente={"basico-2"}>
-            basico-1
+        <LessonPageTemplate initialSession={initialSession} user={user} titulo={titulo} actual={"basico-1"} siguiente={"basico-2"}>
+            {titulo}
+            <CameraAccess/>
         </LessonPageTemplate>
     )
 }

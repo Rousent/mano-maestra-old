@@ -4,8 +4,10 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export default function Page({ initialSession, user }) {
 
+    const titulo = "2. Saludos"
+
     return (
-        <LessonPageTemplate initialSession={initialSession} user={user} actual={"basico-2"} anterior={"basico-1"}>
+        <LessonPageTemplate initialSession={initialSession} titulo={titulo} user={user} actual={"basico-2"} anterior={"basico-1"}>
             basico-2
         </LessonPageTemplate>
     )

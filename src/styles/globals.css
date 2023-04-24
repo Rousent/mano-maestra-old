@@ -28,16 +28,16 @@ label {
   @apply w-full font-medium text-lg;
 }
 button {
-  @apply w-fit h-fit self-center border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg transition-all duration-150;
+  @apply border-negro w-fit h-fit self-center border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg transition-all duration-150;
 }
 input, input[type=text], input[type=password], input[type=email], input[type=textarea] {
-  @apply flex w-full object-contain border-solid border-2 rounded-lg px-3 py-[0.1rem];
+  @apply border-negro flex w-full object-contain border-solid border-2 rounded-lg px-3 py-[0.1rem];
 }
 form {
   @apply h-fit flex flex-col gap-6 bg-fondo rounded-lg p-10;
 }
 .buttonLike {
-  @apply w-fit h-fit border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg hover:no-underline transition-all duration-150;
+  @apply border-negro w-fit h-fit border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg hover:no-underline transition-all duration-150;
 }
 
 .iconButton {
@@ -57,7 +57,7 @@ form {
 }
 
 .ficha {
-  @apply text-center flex flex-row w-fit self-center py-1 px-5 font-medium border-solid rounded-3xl border-2;
+  @apply border-negro text-center flex flex-row w-fit self-center py-1 px-5 font-medium border-solid rounded-3xl border-2;
 }
 
 .loader {
@@ -76,5 +76,13 @@ form {
 }
 
 .lessonNavigation {
-  @apply w-fit py-1 px-3 border-solid border-[0.2rem] border-naranja rounded-lg self-center;
+  @apply w-fit py-1 px-3 border-solid border-[0.2rem] border-naranja rounded-lg self-center bg-blanco;
+}
+
+.aqui {
+  @apply font-bold text-lg transition-all duration-150 hover:underline;
+}
+
+.botonSubirNivel {
+  @apply font-semibold bg-yellow-400 w-fit h-fit border-solid border-2 border-negro rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg hover:no-underline transition-all duration-150;
 }

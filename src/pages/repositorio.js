@@ -5,7 +5,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 export default function Repositorio({ initialSession }) {
     return (
         <>
-        <Navigation session={initialSession}/>
+        <Navigation session={initialSession} aqui={"repositorio"}/>
         </>
     )
 }
