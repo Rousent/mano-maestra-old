@@ -45,7 +45,7 @@ export default function Login() {
                         <div className="flex flex-col">
                             <label htmlFor="password">Contraseña</label>
                             <input id="password" type="password" placeholder="Inserte contraseña" className="textfield" onChange={(e) => setPassword(e.target.value)}/>
-                            <Link href={"/"} className="mt-2 underline decoration-azul">¿Olvidaste tu contraseña?</Link>
+                            <Link href={"/login/recovery-request"} className="mt-2 underline decoration-azul">¿Olvidaste tu contraseña?</Link>
                         </div>
                         <div className="error">{errores}</div>
                     </div>

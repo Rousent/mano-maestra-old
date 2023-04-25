@@ -25,6 +25,11 @@ export const getServerSideProps = async (ctx) => {
         initialSession: null,
       },
     }
+  
+  const { data } = await supabase.from("perfiles").select().eq("idUsuario", session.user.id)
+  if (data.idRol == 1) {
+    return { destination: '/admin', permanent: false, }
+  }
 
   return {
     props: {
