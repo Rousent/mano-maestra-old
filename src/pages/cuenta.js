@@ -4,6 +4,8 @@ import { useState } from "react"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { useRouter } from "next/router"
+import { getFullUser } from "../utilities/methods"
+import { modificarDatos, modificarContraseña } from "../utilities/methods"
 
 export default function Account({ initialSession, user }) {
 
@@ -44,7 +46,6 @@ function Datos({ user }) {
 
 function ModificarDatos({ user }) {
     const router = useRouter()
-    const supabase = useSupabaseClient()
 
     const [nombres, setNombres] = useState()
     const [apellidoPaterno, setApellidoPaterno] = useState()
@@ -54,25 +55,11 @@ function ModificarDatos({ user }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError(null)
-        let cambios = {}
-        if (nombres) {
-            Object.assign(cambios, {nombres})
-        }
-        if (apellidoPaterno) {
-            Object.assign(cambios, {apellidoPaterno})
-        }
-        if (apellidoMaterno) {
-            Object.assign(cambios, {apellidoMaterno})
-        }
-        if (Object.keys(cambios).length > 0) {
-            const { error } = await supabase.from("perfiles").update(cambios).eq("idUsuario", user.idUsuario)
-            if (error) {
-                setError(error.message)
-            } else {
-                router.reload()
-            }
+        const error = modificarDatos(user, nombres, apellidoPaterno, apellidoMaterno)
+        if (error) {
+            setError(error)
         } else {
-            setError("No hay cambios que realizar")
+            router.reload()
         }
     }
 
@@ -102,7 +89,6 @@ function ModificarDatos({ user }) {
 
 function ModificarContraseña() {
     const router = useRouter()
-    const supabase = useSupabaseClient()
 
     const [actual, setActual] = useState()
     const [nueva, setNueva] = useState()
@@ -112,19 +98,11 @@ function ModificarContraseña() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError(null)
-        if (actual && nueva && confirmar) {
-            if (nueva == confirmar) {
-                const { error } = await supabase.rpc("change_user_password", {current_plain_password: actual, new_plain_password: nueva,})
-                if (error) {
-                    setError(error.message)
-                } else {
-                    router.reload()
-                }
-            } else {
-                setError("Las contraseñas no concuerdan")
-            }
+        const error = modificarContraseña(actual, nueva, confirmar)
+        if (error) {
+            setError(error)
         } else {
-            setError("Debes rellenar todos los campos")
+            router.reload()
         }
     }
 
@@ -165,26 +143,7 @@ export const getServerSideProps = async (ctx) => {
             },
         }
     } else {
-        const { data } = await supabase.from("perfiles").select().eq("idUsuario", session.user.id)
-        const response = data[0]
-        const rol = await supabase.from("roles").select("descripcion").eq("idRol", response.idRol)
-        const rolResponse = rol.data[0]
-        const userObject = {
-            idUsuario: session.user.id,
-            nombres: response.nombres,
-            apellidoPaterno: response.apellidoPaterno,
-            apellidoMaterno: response.apellidoMaterno,
-            email: session.user.email,
-            idRol: response.idRol,
-            rol: rolResponse.descripcion,
-            valorNivel: null,
-            nivel: null
-        }
-        if (response.idRol == 2||response.idRol == 3||response.idRol == 4) {
-            const { data } = await supabase.from("estudiantes").select("idNivel, niveles (descripcion)").eq("idUsuario", session.user.id)
-            userObject.valorNivel = data[0].idNivel
-            userObject.nivel = data[0].niveles.descripcion
-        }
-        return { props: { initialSession: session, user: userObject } }
+        const user = getFullUser()
+        return { props: { initialSession: session, user: user } }
     }
 }

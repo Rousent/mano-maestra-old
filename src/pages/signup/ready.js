@@ -1,43 +1,15 @@
 
 import Link from "next/link"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
-import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { useEffect } from "react"
 
-export default function Standby( initialSession, user ){
-    const supabase = useSupabaseClient()
+import { crearPerfil } from "../../utilities/methods"
 
-    const createProfile = async () => {
-        if (initialSession) {
-            try {
-                const { error } = await supabase.from("perfiles").insert({
-                    idUsuario: user.id,
-                    nombres: user.user_metadata.nombres,
-                    apellidoPaterno: user.user_metadata.apellidoPaterno,
-                    apellidoMaterno: user.user_metadata.apellidoMaterno,
-                    idRol: user.user_metadata.idRol,
-                })
-                const result = await supabase.from("estudiantes").insert({
-                    idUsuario: user.id,
-                    idNivel: 1,
-                })
-                if (error) {
-                    alert(error.message)
-                } else if (result.error.message) {
-                    alert(result.error.message)
-                } else {
-                    alert("Usuario registrado con exito")
-                }
-            } catch(e) {
-                //
-            }
-        } else {
-            alert("Hubo un error con la autenticación de su correo")
-        }
-    }
+export default function Standby(){
     
     useEffect(() => {
-        createProfile()
+        const mensaje = crearPerfil()
+        alert(mensaje)
     },[])
 
     return (
@@ -62,11 +34,11 @@ export const getServerSideProps = async (ctx) => {
     if (session) {
         const { data } = await supabase.from("perfiles").select().eq("idUsuario", session.user.id)
         if (data.length == 0) {
-            return { props: { initialSession: session, user: session.user } }
+            return { props: { user: session.user } }
         } else {
             return { redirect: { destination: '/', permanent: false, },}
         }
     } else {
-        return { props: { initialSession: false, user: false } }
+        return null
     }
 }

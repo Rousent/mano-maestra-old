@@ -29,6 +29,6 @@ export const getServerSideProps = async (ctx) => {
             },
         }
     } else {
-        return { props: { initialSession: false } }
+        return { props: { initialSession: null } }
     }
 }

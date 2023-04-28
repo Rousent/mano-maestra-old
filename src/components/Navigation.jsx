@@ -1,9 +1,8 @@
 
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { MdOutlineAccountCircle } from "react-icons/md"
 import { BiLogOut } from "react-icons/bi"
-import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import { cerrarSesion } from "../utilities/methods"
 
 // añadir llamada=null cuando se implementen las llamadas de practica para las migas de pan.
 
@@ -59,12 +58,9 @@ function Profile() {
 }
 
 function LogOut() {
-    const supabase = useSupabaseClient()
-    const router = useRouter()
 
     const handleClick = async () => {
-        await supabase.auth.signOut()
-        router.push("/")
+        cerrarSesion()
     }
 
     return <BiLogOut id="logout" onClick={handleClick} className="iconButton"/>

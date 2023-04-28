@@ -2,11 +2,10 @@
 import { useRouter } from "next/router"
 import Link from "next/link"
 import { useState } from "react"
-import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
+import { iniciarSesion } from "../../utilities/methods"
 
 export default function Login() {
-    const supabase = useSupabaseClient()
     const router = useRouter()
 
     const [email, setEmail] = useState()
@@ -19,7 +18,7 @@ export default function Login() {
         e.preventDefault()
         setErrores(null)
         if (email && password) {
-            const { error } = await supabase.auth.signInWithPassword({email: email, password: password})
+            const error = iniciarSesion(email,password)
             if (!error) {
                 setBoton(<div className="loader"/>)
                 router.push("/")
