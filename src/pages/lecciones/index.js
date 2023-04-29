@@ -4,13 +4,14 @@ import LessonContainer from "@/components/LessonContainer"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { useRouter } from "next/router"
+import { getFullUser, getLecciones, getPorcentajes, subirNivel } from "../../utilities/methods"
 
 export default function LessonsPage({ initialSession, user, lecciones, done, subir }) {
     const supabase = useSupabaseClient()
     const router = useRouter()
 
-    const subirNivel = async () => {
-        const { error } = await supabase.from("estudiantes").update({ idNivel: (user.valorNivel+1)}).eq("idUsuario", user.idUsuario)
+    const handleClick = async () => {
+        const error = subirNivel(user)
         if (error) {
             console.log(error.message)
         } else {
@@ -18,7 +19,7 @@ export default function LessonsPage({ initialSession, user, lecciones, done, sub
         }
     }
 
-    const botonSubir = (subir) ? <button onClick={subirNivel} className="botonSubirNivel">Subir de nivel</button> : null
+    const botonSubir = (subir) ? <button onClick={handleClick} className="botonSubirNivel">Subir de nivel</button> : null
 
     return (
         <>
@@ -71,66 +72,15 @@ export const getServerSideProps = async (ctx) => {
         }
     } else {
         // Obtener todos los datos del usuario
-        const { data } = await supabase.from("perfiles").select().eq("idUsuario", session.user.id)
-        const response = data[0]
-        const rol = await supabase.from("roles").select("descripcion").eq("idRol", response.idRol)
-        const rolResponse = rol.data[0]
-        const userObject = {
-            idUsuario: session.user.id,
-            nombres: response.nombres,
-            apellidoPaterno: response.apellidoPaterno,
-            apellidoMaterno: response.apellidoMaterno,
-            email: session.user.email,
-            idRol: response.idRol,
-            rol: rolResponse.descripcion,
-            valorNivel: null,
-            nivel: null
-        }
-        if (response.idRol == 2||response.idRol == 3||response.idRol == 4) {
-            const { data } = await supabase.from("estudiantes").select("idNivel, niveles (descripcion)").eq("idUsuario", session.user.id)
-            userObject.valorNivel = data[0].idNivel
-            userObject.nivel = data[0].niveles.descripcion
-        }
+        const user = getFullUser()
         //
 
         // Obtener las lecciones
-        const lecciones = await supabase.from("lecciones").select()
-        const completadas = await supabase.from("lecciones-completadas").select().eq("idUsuario", session.user.id)
-        lecciones.data.forEach((leccion) => {
-            Object.assign(leccion, { done: false })
-        })
-        completadas.data.forEach((lecCompletada) => {
-            lecciones.data.forEach((leccion) => {
-                if (lecCompletada.idLeccion == leccion.idLeccion) {
-                    leccion.done = true
-                }
-            })
-        })
-        const basico = lecciones.data.filter(leccion => leccion.idNivel == 1)
-        basico.sort((x, y) => x.titulo.localeCompare(y.titulo))
-        const intermedio = lecciones.data.filter(leccion => leccion.idNivel == 2)
-        intermedio.sort((x, y) => x.titulo.localeCompare(y.titulo))
-        const avanzado = lecciones.data.filter(leccion => leccion.idNivel == 3)
-        avanzado.sort((x, y) => x.titulo.localeCompare(y.titulo))
-        const empresas = lecciones.data.filter(leccion => leccion.idNivel == 4)
-        empresas.sort((x, y) => x.titulo.localeCompare(y.titulo))
-        const lista = {basico, intermedio, avanzado, empresas}
+        const lecciones = getLecciones(user)
         //
 
         // Obtener porcentaje de completado por cada nivel
-        let porcentajes = { basico: -1, intermedio: -1, avanzado: -1, empresas: -1 }
-        if (userObject.valorNivel >= 1 && lista.basico.length > 0){
-            porcentajes.basico = (lista.basico.filter(leccion => leccion.done == true).length*100) / lista.basico.length
-        }
-        if (userObject.valorNivel >= 2 && lista.intermedio.length > 0){
-            porcentajes.intermedio = (lista.intermedio.filter(leccion => leccion.done == true).length*100) / lista.intermedio.length
-        }
-        if (userObject.valorNivel >= 3 && lista.avanzado.length > 0){
-            porcentajes.avanzado = (lista.avanzado.filter(leccion => leccion.done == true).length*100) / lista.avanzado.length
-        }
-        if (userObject.valorNivel >= 1 && lista.empresas.length > 0){
-            porcentajes.empresas = (lista.empresas.filter(leccion => leccion.done == true).length*100) / lista.empresas.length
-        }
+        const porcentajes = getPorcentajes(lecciones)
         //
 
         /**
@@ -143,7 +93,7 @@ export const getServerSideProps = async (ctx) => {
          * El criterio para subir de nivel podria variar en proximas versiones.
          * */
         let subir = null
-        switch (userObject.valorNivel) {
+        switch (user.valorNivel) {
             case 1:
                 if (porcentajes.basico == 100) {
                     subir = true
@@ -155,8 +105,8 @@ export const getServerSideProps = async (ctx) => {
                 }
                 break;
         }
-        console.log(userObject.valorNivel)
+        console.log(user.valorNivel)
         console.log(subir)
-        return { props: { initialSession: session, user: userObject, lecciones: lista, done: porcentajes, subir } }
+        return { props: { initialSession: session, user: user, lecciones: lecciones, done: porcentajes, subir } }
     }
 }

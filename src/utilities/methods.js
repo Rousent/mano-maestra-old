@@ -44,7 +44,50 @@ export const getFullUser = async () => {
 }
 
 export const getLecciones = async (user) => {
-    //
+    const supabase = createServerSupabaseClient()
+
+    const lecciones = await supabase.from("lecciones").select()
+    const completadas = await supabase.from("lecciones-completadas").select().eq("idUsuario", user.idUsuario)
+    lecciones.data.forEach((leccion) => {
+        Object.assign(leccion, { done: false })
+    })
+    completadas.data.forEach((lecCompletada) => {
+        lecciones.data.forEach((leccion) => {
+            if (lecCompletada.idLeccion == leccion.idLeccion) {
+                leccion.done = true
+            }
+        })
+    })
+    const basico = lecciones.data.filter(leccion => leccion.idNivel == 1)
+    basico.sort((x, y) => x.titulo.localeCompare(y.titulo))
+    const intermedio = lecciones.data.filter(leccion => leccion.idNivel == 2)
+    intermedio.sort((x, y) => x.titulo.localeCompare(y.titulo))
+    const avanzado = lecciones.data.filter(leccion => leccion.idNivel == 3)
+    avanzado.sort((x, y) => x.titulo.localeCompare(y.titulo))
+    const empresas = lecciones.data.filter(leccion => leccion.idNivel == 4)
+    empresas.sort((x, y) => x.titulo.localeCompare(y.titulo))
+    const lista = {basico, intermedio, avanzado, empresas}
+
+    return lista
+}
+
+export const getPorcentajes = (lista) => {
+    let porcentajes = { basico: -1, intermedio: -1, avanzado: -1, empresas: -1 }
+
+    if (userObject.valorNivel >= 1 && lista.basico.length > 0){
+        porcentajes.basico = (lista.basico.filter(leccion => leccion.done == true).length*100) / lista.basico.length
+    }
+    if (userObject.valorNivel >= 2 && lista.intermedio.length > 0){
+        porcentajes.intermedio = (lista.intermedio.filter(leccion => leccion.done == true).length*100) / lista.intermedio.length
+    }
+    if (userObject.valorNivel >= 3 && lista.avanzado.length > 0){
+        porcentajes.avanzado = (lista.avanzado.filter(leccion => leccion.done == true).length*100) / lista.avanzado.length
+    }
+    if (userObject.valorNivel >= 1 && lista.empresas.length > 0){
+        porcentajes.empresas = (lista.empresas.filter(leccion => leccion.done == true).length*100) / lista.empresas.length
+    }
+
+    return porcentajes
 }
 
 // Empieza las pruebas a partir de aqui. Separe los metodos en base a la "clase" a la que corresponde en el diagrama.
@@ -176,8 +219,9 @@ export const recuperarCuenta = async (nueva, confirmar) => {
 
 // Estudiante :
 
-export const subirNivel = async () => {
-    //
+export const subirNivel = async (user) => {
+    const { error } = await supabase.from("estudiantes").update({ idNivel: (user.valorNivel+1)}).eq("idUsuario", user.idUsuario)
+    return error
 }
 
 // Pendiente (ojala para siempre)
