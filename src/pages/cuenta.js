@@ -65,7 +65,7 @@ function ModificarDatos({ user }) {
             Object.assign(cambios, {apellidoMaterno})
         }
         if (Object.keys(cambios).length > 0) {
-            const { error } = await supabase.from("perfiles").update(cambios).eq("idUsuario", user.idUsuario)
+            const { error } = await supabase.from("perfiles").update(cambios).eq("id_usuario", user.id)
             if (error) {
                 setError(error.message)
             } else {
@@ -158,33 +158,9 @@ export const getServerSideProps = async (ctx) => {
     const { data: { session } } = await supabase.auth.getSession()
     
     if (!session) {
-        return {
-            redirect: {
-                destination: '/login',
-                permanent: false,
-            },
-        }
+        return { redirect: { destination: '/login', permanent: false, } }
     } else {
-        const { data } = await supabase.from("perfiles").select().eq("idUsuario", session.user.id)
-        const response = data[0]
-        const rol = await supabase.from("roles").select("descripcion").eq("idRol", response.idRol)
-        const rolResponse = rol.data[0]
-        const userObject = {
-            idUsuario: session.user.id,
-            nombres: response.nombres,
-            apellidoPaterno: response.apellidoPaterno,
-            apellidoMaterno: response.apellidoMaterno,
-            email: session.user.email,
-            idRol: response.idRol,
-            rol: rolResponse.descripcion,
-            valorNivel: null,
-            nivel: null
-        }
-        if (response.idRol == 2||response.idRol == 3||response.idRol == 4) {
-            const { data } = await supabase.from("estudiantes").select("idNivel, niveles (descripcion)").eq("idUsuario", session.user.id)
-            userObject.valorNivel = data[0].idNivel
-            userObject.nivel = data[0].niveles.descripcion
-        }
-        return { props: { initialSession: session, user: userObject } }
+        const user = await supabase.rpc("get_full_user")
+        return { props: { initialSession: session, user: user.data } }
     }
 }

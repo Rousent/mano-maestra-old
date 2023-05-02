@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/router"
 
-export default function recovery({ initialSession }) {
+export default function recovery() {
     const router = useRouter()
     const supabase = useSupabaseClient()
 
@@ -11,6 +11,8 @@ export default function recovery({ initialSession }) {
     const [confirm, setConfirm] = useState()
 
     const handleSubmit = async (e) => {
+        const { data } = await supabase.auth.getSession()
+        console.log(data)
         e.preventDefault()
         if (newPassword && confirm && newPassword == confirm) {
             const { error } = await supabase.auth.updateUser({ password: newPassword })
@@ -23,6 +25,20 @@ export default function recovery({ initialSession }) {
             alert("algo estas haciendo mal wey")
         }
     }
+
+    useEffect(() => {
+        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'PASSWORD_RECOVERY') {
+              // El usuario ha solicitado restablecer su contraseña, muestra el formulario de restablecimiento de contraseña
+            } else if (event === 'SIGNED_IN') {
+              // El usuario ya ha iniciado sesión, redirigir a la página de inicio
+              router.push('/')
+            }
+          })
+          return () => {
+            authListener.subscription.unsubscribe()
+        }
+    },[])
 
     return (
         <div className="w-full h-full bg-placeholder bg-no-repeat bg-cover bg-center">
@@ -43,27 +59,4 @@ export default function recovery({ initialSession }) {
             </div>
         </div>
     )
-}
-
-export const getServerSideProps = async (ctx) => {
-
-    const supabase = createServerSupabaseClient(ctx)
-    
-    const { data: { session } } = await supabase.auth.getSession()
-    
-    if (!session) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
-        }
-    } else {
-        supabase.auth.onAuthStateChange(async (event, session) => {
-            if (event == "PASSWORD_RECOVERY") {
-                return { props: { initialSession: session } }
-            }
-        })
-        return { props: { initialSession: session } }
-    }
 }
