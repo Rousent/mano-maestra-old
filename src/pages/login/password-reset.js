@@ -6,13 +6,34 @@ import { useRouter } from "next/router"
 export default function recovery() {
     const router = useRouter()
     const supabase = useSupabaseClient()
+    const [hash, setHash] = useState(null)
 
     const [newPassword, setNewPassword] = useState()
     const [confirm, setConfirm] = useState()
 
     const handleSubmit = async (e) => {
-        const { data } = await supabase.auth.getSession()
-        console.log(data)
+        if (!hash) {
+            console.log("no hash")
+        } else {
+            const hashArr = hash.substring(1).split("&").map((param) => param.split("="))
+
+            let type;
+            let accessToken;
+            for (const [key, value] of hashArr) {
+                if (key === "type") {
+                    type = value
+                } else if (key === "access_token") {
+                    accessToken = value
+                }
+            }
+
+            if (type !== "recovery" || !accessToken || typeof accessToken === "object") {
+                //
+            } else {
+                //const session = await supabase.auth.setSession( currentSession: { ac} )
+                const { error } = await supabase.auth.updateUser()
+            }
+        }
         e.preventDefault()
         if (newPassword && confirm && newPassword == confirm) {
             const { error } = await supabase.auth.updateUser({ password: newPassword })
@@ -27,17 +48,7 @@ export default function recovery() {
     }
 
     useEffect(() => {
-        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-            if (event === 'PASSWORD_RECOVERY') {
-              // El usuario ha solicitado restablecer su contraseña, muestra el formulario de restablecimiento de contraseña
-            } else if (event === 'SIGNED_IN') {
-              // El usuario ya ha iniciado sesión, redirigir a la página de inicio
-              router.push('/')
-            }
-          })
-          return () => {
-            authListener.subscription.unsubscribe()
-        }
+        setHash(window.location.hash)
     },[])
 
     return (

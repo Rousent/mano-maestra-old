@@ -14,11 +14,12 @@ export default function LessonsPage({ initialSession, user, lecciones, porcentaj
         if (error) {
             console.log(error.message)
         } else {
+            alert("¡Felicidades!")
             router.reload()
         }
     }
 
-    const botonSubir = (subir) ? <button onClick={subirNivel} className="botonSubirNivel">Subir de nivel</button> : null
+    const botonSubir = (subir) ? <button id="subirNivel" onClick={subirNivel} className="botonSubirNivel">Subir de nivel</button> : null
 
     return (
         <>

@@ -12,7 +12,7 @@ export default function request() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const { error } = await supabase.auth.resetPasswordForEmail(email)
+        const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: "http://localhost:3000/password-reset"})
         if (error) {
             alert(error.message)
         } else {
