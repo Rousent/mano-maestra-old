@@ -6,11 +6,11 @@ export default function LessonNavigation({ anterior=false, actual, user, siguien
     const supabase = useSupabaseClient()
 
     const completarLeccion = async () => {
-        const { data } = await supabase.from("lecciones-completadas").select().match({ "idUsuario": user.id, "idLeccion": actual })
+        const { data } = await supabase.from("lecciones_completadas").select().match({ "id_usuario": user.id, "id_leccion": actual })
         if (data.length == 0) {
-            const { error } = await supabase.from("lecciones-completadas").insert({ idLeccion: actual, idUsuario: user.id })
+            const { error } = await supabase.from("lecciones_completadas").insert({ id_leccion: actual, id_usuario: user.id })
             if (error) {
-                console.log(error.message)
+                alert(error.message)
             }
         }
     }

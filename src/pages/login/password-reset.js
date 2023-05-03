@@ -1,54 +1,52 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { useEffect, useState } from "react"
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/router"
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 
 export default function recovery() {
     const router = useRouter()
     const supabase = useSupabaseClient()
-    const [hash, setHash] = useState(null)
 
     const [newPassword, setNewPassword] = useState()
     const [confirm, setConfirm] = useState()
 
     const handleSubmit = async (e) => {
-        if (!hash) {
-            console.log("no hash")
-        } else {
-            const hashArr = hash.substring(1).split("&").map((param) => param.split("="))
-
-            let type;
-            let accessToken;
-            for (const [key, value] of hashArr) {
-                if (key === "type") {
-                    type = value
-                } else if (key === "access_token") {
-                    accessToken = value
-                }
-            }
-
-            if (type !== "recovery" || !accessToken || typeof accessToken === "object") {
-                //
-            } else {
-                //const session = await supabase.auth.setSession( currentSession: { ac} )
-                const { error } = await supabase.auth.updateUser()
-            }
-        }
         e.preventDefault()
         if (newPassword && confirm && newPassword == confirm) {
             const { error } = await supabase.auth.updateUser({ password: newPassword })
             if (error) {
                 alert(error.message)
             } else {
+                alert("Cambio de contraseña exitoso")
+                await supabase.auth.signOut()
                 router.push("/login")
             }
         } else {
-            alert("algo estas haciendo mal wey")
+            alert("Las contraseñas no concuerdan.")
+        }
+    }
+
+    const onInit = async () => {
+        const hash = window.location.hash
+        const hashArr = hash.substring(1).split("&").map((param) => param.split("="))
+        let type;
+        for (const [key, value] of hashArr) {
+            if (key === "type") {
+                type = value
+            }
+        }
+        if (type === "recovery") {
+            const { data: { session } } = await supabase.auth.getSession()
+            if (!session) {
+                router.push("/login")
+            }
+        } else {
+            router.push("/login")
         }
     }
 
     useEffect(() => {
-        setHash(window.location.hash)
+        onInit()
     },[])
 
     return (
@@ -70,4 +68,14 @@ export default function recovery() {
             </div>
         </div>
     )
+}
+
+export const getServerSideProps = async (ctx) => {
+    const supabase = createServerSupabaseClient(ctx)
+
+    const { data: { session } } = await supabase.auth.getSession()
+
+    if (session) return { redirect: { destination: "/", permanent: false } }
+
+    return { props: {} }
 }

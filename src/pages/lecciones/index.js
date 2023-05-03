@@ -14,7 +14,6 @@ export default function LessonsPage({ initialSession, user, lecciones, porcentaj
         if (error) {
             console.log(error.message)
         } else {
-            alert("¡Felicidades!")
             router.reload()
         }
     }
