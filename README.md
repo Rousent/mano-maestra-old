@@ -7,6 +7,8 @@ Obtener ambos de API Settings del proyecto en supabase.
 
 Despues, si hay dapendencias faltantes, ejecutar npm i
 
+Para ejecutarlo: npm run dev
+
 ### Necesario
 * Node.js LTS
 
