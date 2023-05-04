@@ -27,7 +27,6 @@ export default function Standby(){
                 })
                 if (error) {
                     console.log(error)
-                    alert(error.message)
                 } else if (result.error) {
                     console.log(result.error)
                 } else {
