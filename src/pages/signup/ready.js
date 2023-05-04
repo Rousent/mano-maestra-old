@@ -1,35 +1,40 @@
 
 import Link from "next/link"
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { useEffect } from "react"
+import {useRouter } from "next/router"
 
-export default function Standby( initialSession, user ){
+export default function Standby(){
     const supabase = useSupabaseClient()
+    const router = useRouter()
 
     const createProfile = async () => {
-        if (initialSession) {
-            try {
+        const { data: { session } } = await supabase.auth.getSession()
+        
+        if (session) {
+            const { data } = await supabase.from("perfiles").select().eq("id_usuario",session.user.id)
+            if (data.length == 0) {
                 const { error } = await supabase.from("perfiles").insert({
-                    idUsuario: user.id,
-                    nombres: user.user_metadata.nombres,
-                    apellidoPaterno: user.user_metadata.apellidoPaterno,
-                    apellidoMaterno: user.user_metadata.apellidoMaterno,
-                    idRol: user.user_metadata.idRol,
+                    id_usuario: session.user.id,
+                    nombres: session.user.user_metadata.nombres,
+                    apellido_paterno: session.user.user_metadata.apellidoPaterno,
+                    apellido_materno: session.user.user_metadata.apellidoMaterno,
+                    id_rol: session.user.user_metadata.idRol,
                 })
                 const result = await supabase.from("estudiantes").insert({
-                    idUsuario: user.id,
-                    idNivel: 1,
+                    id_usuario: session.user.id,
+                    id_nivel: 1,
                 })
                 if (error) {
+                    console.log(error)
                     alert(error.message)
-                } else if (result.error.message) {
-                    alert(result.error.message)
+                } else if (result.error) {
+                    console.log(result.error)
                 } else {
                     alert("Usuario registrado con exito")
                 }
-            } catch(e) {
-                //
+            } else {
+                router.push("/")
             }
         } else {
             alert("Hubo un error con la autenticación de su correo")
@@ -51,22 +56,4 @@ export default function Standby( initialSession, user ){
             </div>
         </div>
     )
-}
-
-export const getServerSideProps = async (ctx) => {
-
-    const supabase = createServerSupabaseClient(ctx)
-    
-    const { data: { session } } = await supabase.auth.getSession()
-    
-    if (session) {
-        const { data } = await supabase.from("perfiles").select().eq("idUsuario", session.user.id)
-        if (data.length == 0) {
-            return { props: { initialSession: session, user: session.user } }
-        } else {
-            return { redirect: { destination: '/', permanent: false, },}
-        }
-    } else {
-        return { props: { initialSession: false, user: false } }
-    }
 }
