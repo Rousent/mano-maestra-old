@@ -25,7 +25,7 @@ a {
   @apply no-underline transition-all duration-150 hover:underline hover:text-lg;
 }
 label {
-  @apply w-full font-medium text-lg;
+  @apply w-full font-medium text-lg select-none;
 }
 button {
   @apply border-negro w-fit h-fit self-center border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg transition-all duration-150;
@@ -58,17 +58,6 @@ form {
 
 .ficha {
   @apply border-negro text-center flex flex-row w-fit self-center py-1 px-5 font-medium border-solid rounded-3xl border-2;
-}
-
-.loader {
-  border: 1rem solid var(--fondo);
-  border-top: 1rem solid var(--azul);
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  animation: spin 2s linear infinite;
-  justify-self: center;
-  align-self: center;
 }
 
 .error {

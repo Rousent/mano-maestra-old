@@ -19,14 +19,14 @@ export const getServerSideProps = async (ctx) => {
   
   const { data: { session } } = await supabase.auth.getSession()
   
-  if (!session) return { props: { initialSession: null, },}
-  
-  /**
-  const { data } = await supabase.from("perfiles").select().eq("idUsuario", session.user.id)
-  if (data.idRol == 1) {
-    return { destination: '/admin', permanent: false, }
+  if (!session) {
+    return { props: { initialSession: null, },}
+  } else {
+    const { data } = await supabase.rpc("get_full_user")
+    if (data.rol === "Administrador") {
+      return { redirect: { destination: '/admin', permanent: false, } }
+    } else {
+      return { props: { initialSession: session, user: session.user, }, }
+    }
   }
-  */
-
-  return { props: { initialSession: session, user: session.user, }, }
 }

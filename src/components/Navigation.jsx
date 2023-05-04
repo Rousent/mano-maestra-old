@@ -1,9 +1,7 @@
 
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { MdOutlineAccountCircle } from "react-icons/md"
 import { BiLogOut } from "react-icons/bi"
-import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { useState } from "react"
 import LogOutConfirmation from "./Confirmation"
 
@@ -61,14 +59,10 @@ function Profile() {
 }
 
 function LogOut() {
-    const supabase = useSupabaseClient()
-    const router = useRouter()
     const [open, setOpen] = useState(false)
 
     const handleClick = async () => {
         setOpen(true)
-        //await supabase.auth.signOut()
-        //router.push("/")
     }
 
     return (

@@ -74,6 +74,8 @@ export const getServerSideProps = async (ctx) => {
         const user = await supabase.rpc("get_full_user")
         //
 
+        if (user.data.rol === "Administrador") return { redirect: { destination: "/admin", permanent: false, } }
+
         // Obtener las lecciones
         const lecciones = await supabase.rpc("get_lessons")
         const basico = lecciones.data["Nivel Basico"]
