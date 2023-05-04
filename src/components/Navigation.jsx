@@ -15,7 +15,7 @@ export default function Navigation({ session, aqui, leccion=null, }) {
     const empresas = (aqui == "empresas") ? <Link href="/empresas" className="aqui">[ Para Empresas ]</Link> : <Link href="/empresas">Para Empresas</Link>
     const repositorio = (aqui == "repositorio") ? <Link href="/repositorio" className="aqui">[ Repositorio ]</Link> : <Link href="/repositorio">Repositorio</Link>
     const lecciones = (session && aqui == "lecciones") ? <div className="flex items-center"><Link href="/lecciones" className="aqui">[ Lecciones ]</Link>{migaLeccion}</div> : (session) ? <Link href="/lecciones">Lecciones</Link> : null
-    const practica = (session && aqui == "practica") ? <Link href="/practica" className="aqui">Practica</Link> : (session) ? <Link href="/practica">Practica</Link> : null
+    const practica = (session && aqui == "practica") ? <Link href="/practica" className="aqui">[ Practica ]</Link> : (session) ? <Link href="/practica">Practica</Link> : null
 
     return (
         <nav className="top-0 sticky z-50 flex bg-fondo h-24 justify-between items-center border-solid border-negro border-2 px-5 shadow-lg">

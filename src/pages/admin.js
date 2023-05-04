@@ -20,7 +20,7 @@ export default function admin({ initialSession, user }) {
         <Navigation/>
         <div className="flex py-20 justify-center">
           <form className="border-2 border-black w-form-thin">
-            <h4 className="text-center">Creando cuenta de Usuario Empresarial o Experto</h4>
+            <h4 className="text-center font-semibold text-3xl">Creando cuenta de Usuario Empresarial o Experto</h4>
             <div className="flex flex-col gap-2">
               <div className="flex flex-col w-full">
                 <label>Nombre(s)</label>
