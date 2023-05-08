@@ -66,8 +66,8 @@ function LogOut() {
     }
 
     return (
-        <div>
-            <BiLogOut id="logout" onClick={handleClick} className="iconButton"/>
+        <div className="flex gap-0">
+            <button id="logout" onClick={handleClick} className="p-0 border-none"><BiLogOut className="iconButton"/></button>
             <LogOutConfirmation open={open} setOpen={setOpen}/>
         </div>
     )

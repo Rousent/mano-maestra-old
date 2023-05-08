@@ -8,30 +8,56 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react"
 export default function admin({ initialSession, user }) {
   const supabase = useSupabaseClient()
 
+  const [nombres, setNombres] = useState()
+  const [paterno, setPaterno] = useState()
+  const [materno, setMaterno] = useState()
+  const [email, setEmail] = useState()
   const [estudiante, setEstudiante] = useState()
   const [boton, setBoton] = useState(<button className="bg-azul">Crear Cuenta</button>)
 
-  const handleClick = async () => {
-    const { error } = await supabase.auth.signUp()
+  const handleClick = async (e) => {
+    e.preventDefault()
+    setBoton(<Loading/>)
+    let rol
+    if (estudiante === "empresarial") {
+      rol = 4
+    } else if (estudiante === "experto") {
+      rol = 5
+    }
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: "http://localhost:3000/login/set-password" } })
+    const rpc = await supabase.rpc("create_exceptional_user", { _email: email, _nombres: nombres, _paterno: paterno, _materno: materno, _rol: rol })
+    if (error) {
+      alert(error.message)
+    } else if (rpc.error) {
+      alert(rpc.error.message)
+    } else {
+      alert("Usuario creado con exito")
+      //
+    }
+    setBoton(<button className="bg-azul">Crear Cuenta</button>)
   }
 
   return (
         <>
         <Navigation/>
         <div className="flex py-20 justify-center">
-          <form className="border-2 border-black w-form-thin">
+          <form onSubmit={handleClick} className="border-2 border-black w-form-thin">
             <h4 className="text-center font-semibold text-3xl">Creando cuenta de Usuario Empresarial o Experto</h4>
             <div className="flex flex-col gap-2">
               <div className="flex flex-col w-full">
                 <label>Nombre(s)</label>
-                <input id="nombres" placeholder="Ej. Luis Angel"/>
+                <input id="nombres" placeholder="Ej. Luis Angel" onChange={(e) => setNombres(e.target.value)}/>
               </div>
               <div className="flex flex-col w-full">
                 <label>Apellidos</label>
                 <div className="flex flex-row gap-4">
-                  <input id="paterno" placeholder="Paterno"/>
-                  <input id="materno" placeholder="Materno"/>
+                  <input id="paterno" placeholder="Paterno" onChange={(e) => setPaterno(e.target.value)}/>
+                  <input id="materno" placeholder="Materno" onChange={(e) => setMaterno(e.target.value)}/>
                 </div>
+              </div>
+              <div className="flex flex-col w-full">
+                <label>Correo Electrónico</label>
+                <input id="email" type="email" placeholder="Ej. luis@correo.com" onChange={(e) => setEmail(e.target.value)}/>
               </div>
             </div>
             <div className="flex flex-col gap-2">

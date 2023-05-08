@@ -11,6 +11,3 @@ Para ejecutarlo: npm run dev
 
 ### Necesario
 * Node.js LTS
-
-### TO DO
-* Migajas de pan (Navegación)
