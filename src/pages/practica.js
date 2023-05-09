@@ -31,6 +31,7 @@ export const getServerSideProps = async (ctx) => {
       return { props: { initialSession: null, },}
     } else {
       const { data } = await supabase.rpc("get_full_user")
+      if (data.rol === "Experto") return { redirect: { destination: "/", permanent: false, } }
       if (data.rol === "Administrador") {
         return { redirect: { destination: '/admin', permanent: false, } }
       } else {

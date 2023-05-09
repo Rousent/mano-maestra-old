@@ -8,7 +8,7 @@ import { useRouter } from "next/router"
 export default function Account({ initialSession, user }) {
 
     const [contenido, setContenido] = useState(<Datos user={user}/>)
-    const modificarDatos = (true) ? <button id="modificarDatos" className="cuentaButton" onClick={() => setContenido(<ModificarDatos user={user}/>)}>Modificar datos</button> : null
+    const modificarDatos = (user.rol !== "Estudiante Empresarial" && user.rol !== "Experto") ? <button id="modificarDatos" className="cuentaButton" onClick={() => setContenido(<ModificarDatos user={user}/>)}>Modificar datos</button> : null
 
     return (
         <>
