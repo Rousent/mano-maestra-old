@@ -1,7 +1,8 @@
 
 import * as tf from "@tensorflow/tfjs"
 import * as handpose from "@tensorflow-models/handpose"
-import { useRef, useState } from "react";
+import * as fp from "fingerpose"
+import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 
 export default function CameraAccess() {
@@ -24,15 +25,20 @@ export default function CameraAccess() {
 function Camera() {
     const webcamRef = useRef(null)
     const canvasRef = useRef(null)
+    const [prediction, setPrediction] = useState()
+
+    const gestures = [fp.Gestures.VictoryGesture, fp.Gestures.ThumbsUpGesture]
 
     const runHandpose = async () => {
         const net = await handpose.load()
+        console.log("Handpose model loaded.")
+        const GE = new fp.GestureEstimator(gestures)
         setInterval(() => {
-            detect(net)
+            detect(net, GE)
         }, 100)
     }
 
-    const detect = async (net) => {
+    const detect = async (net, GE) => {
         if (typeof webcamRef !== "undefined" && webcamRef.current !== null && webcamRef.current.video.readyState===4) {
 
             const video = webcamRef.current.video
@@ -46,17 +52,34 @@ function Camera() {
             canvasRef.current.height = videoHeight
 
             const hand = await net.estimateHands(video)
+
+            if (hand.length > 0) {
+                const gesture = await GE.estimate(hand[0].landmarks, 4);
+                if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
+                    const confidence = gesture.gestures.map(
+                        (prediction) => prediction.score
+                    );
+                    const maxConfidence = confidence.indexOf(
+                        Math.max.apply(null, confidence)
+                    );
+                    setPrediction(gesture.gestures[maxConfidence].name);
+                    console.log(prediction);
+                }
+            }
+
             const ctx = canvasRef.current.getContext("2d")
             drawHand(hand,ctx)
         }
     }
 
-    runHandpose()
+    useEffect(() => {
+        runHandpose()
+    },[])
 
     return (
         <div className="bg-gray-800 rounded-lg border-[5px] border-gray-800">
-            <Webcam ref={webcamRef} className="absolute rounded-lg mx-auto left-0 right-0 text-center w-[640px] h-[480px]"/>
-            <canvas ref={canvasRef} className="absolute mx-auto rounded-lg left-0 right-0 text-center w-[640px] h-[480px]"/>
+            <Webcam ref={webcamRef} className="absolute rounded-lg mx-auto left-0 right-0 text-center w-fit h-fit"/>
+            <canvas ref={canvasRef} className="absolute mx-auto rounded-lg left-0 right-0 text-center w-fit h-fit"/>
         </div>
     )
 }
