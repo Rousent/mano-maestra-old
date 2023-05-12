@@ -1,11 +1,16 @@
 
 import Navigation from "@/components/Navigation";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { TbCrane } from "react-icons/tb"
 
 export default function Repositorio({ initialSession }) {
     return (
         <>
         <Navigation session={initialSession} aqui={"repositorio"}/>
+        <div className="flex flex-col p-20 gap-5 place-items-center">
+            <TbCrane className="w-40 h-40"/>
+            <div className="text-5xl">Sitio en construcción.</div>
+        </div>
         </>
     )
 }

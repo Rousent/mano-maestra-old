@@ -24,14 +24,14 @@ export default function SlideSelector({ session }) {
     return (
         <div className="flex gap-1 w-full h-[40vw]">
             <SlideSection
-                imagen={"placeholder.png"}
+                imagen={"learn.jpg"}
                 titulo={"Aprender"}
                 subtitulo={"Revisa nuestras lecciones y prueba el sistema de reconocimiento de señas."}
                 instruccion={aprender}
                 direccion={aprLink}
             />
             <SlideSection
-                imagen={"placeholder.png"}
+                imagen={"practice.jpg"}
                 titulo={"Practicar"}
                 subtitulo={"[PROXIMAMENTE]: Unete a sesiones publicas o privadas, o crea un lobby y practica con otras personas en linea."}
                 instruccion={practicar}

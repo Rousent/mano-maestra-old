@@ -4,6 +4,7 @@ import Navigation from "@/components/AdminNavigation"
 import Loading from "@/components/Loading"
 import { useState } from "react"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import getURL from "@/utils/getURL"
 
 export default function admin({ initialSession, user }) {
   const supabase = useSupabaseClient()
@@ -24,8 +25,8 @@ export default function admin({ initialSession, user }) {
     } else if (estudiante === "experto") {
       rol = 5
     }
-    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: "http://localhost:3000/login/set-password" } })
-    const rpc = await supabase.rpc("create_exceptional_user", { _email: email, _nombres: nombres, _paterno: paterno, _materno: materno, _rol: rol })
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: getURL("/login/set-password") } })
+    const rpc = await supabase.rpc("create_user_profile", { _email: email, _nombres: nombres, _paterno: paterno, _materno: materno, _rol: rol })
     if (error) {
       alert(error.message)
     } else if (rpc.error) {

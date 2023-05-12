@@ -8,13 +8,13 @@ export default function practica({ initialSession }) {
         <Navigation session={initialSession} aqui={"practica"}/>
         <div className="flex flex-col gap-5 py-12 px-40">
             <div className="flex flex-col gap-4">
-                <h1 className="text-center">Titulo jijhikjhoijnoijhikjhnkjhkuhikjnlkho</h1>
-                <h2 className="text-center">Subtitulo okjhgkjfkhvkjnokjmnkhgkhjblk</h2>
+                <h2 className="text-center">Practica</h2>
+                <h3 className="text-center">Proximamente: Accede a llamadas con otros usuarios y desarrolla tus habilidades.</h3>
             </div>
             <div className="flex flex-row w-fit h-[600px] self-center gap-10 justify-center items-center">
-                <LobbyAccess href={"/practica"} image={"placeholder"} message={"Unirse a llamada publica"}/>
-                <LobbyAccess href={"/practica"} image={"placeholder"} message={"Unirse a llamada privada"}/>
-                <LobbyAccess href={"/practica"} image={"placeholder"} message={"Crear lobby"}/>
+                <LobbyAccess href={"/practica"} bg={"bg-heart_sign"} message={"Unirse a llamada publica"}/>
+                <LobbyAccess href={"/practica"} bg={"bg-videocall"} message={"Unirse a llamada privada"}/>
+                <LobbyAccess href={"/practica"} bg={"bg-waiting_room"} message={"Crear lobby"}/>
             </div>
         </div>
         </>

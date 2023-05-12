@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import Loading from "@/components/Loading"
+import getURL from "@/utils/getURL"
 
 export default function SignUp() {
     const supabase = useSupabaseClient()
@@ -23,14 +24,15 @@ export default function SignUp() {
     const signUpData = {
         email: email,
         password: password,
-        options: {
-            data: {
-            nombres: nombres,
-            apellidoPaterno: paterno,
-            apellidoMaterno: materno,
-            idRol: 2 },
-            emailRedirectTo: "http://localhost:3000/signup/ready"
-        }
+        options: { emailRedirectTo: getURL("/signup/ready") }
+    }
+
+    const profileData = {
+        _email: email,
+        _nombres: nombres,
+        _paterno: paterno,
+        _materno: materno,
+        _rol: 2,
     }
 
     const handleSubmit = async (e) => {
@@ -39,11 +41,14 @@ export default function SignUp() {
         if (nombres && paterno && materno && email && password && confirm) {
             if (password == confirm) {
                 const { error } = await supabase.auth.signUp(signUpData)
-                if (!error) {
+                const res = await supabase.rpc("create_user_profile", profileData)
+                if (!error && !res.error) {
                     setBoton(<Loading/>)
                     router.push("/signup/standby")
-                } else {
+                } else if (error) {
                     setErrores(error.message)
+                } else if (res.error) {
+                    setErrores(res.error.message)
                 }
             } else {
                 setErrores("Las contraseñas no concuerdan")
@@ -55,7 +60,7 @@ export default function SignUp() {
     }
 
     return (
-        <div className="w-full h-full bg-placeholder bg-no-repeat bg-cover bg-center">
+        <div className="w-full h-full bg-sign_languaje bg-no-repeat bg-cover bg-center">
             <div className="flex gap-40 w-full h-full justify-center items-center backdrop-brightness-40">
                 <form onSubmit={handleSubmit} className="w-form">
                     <h1 className="text-center">Registro</h1>

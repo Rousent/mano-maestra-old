@@ -1,8 +1,6 @@
 import Link from "next/link";
 
-export default function LobbyAccess({ href, image, message }) {
-
-    const bg = `bg-${image}`
+export default function LobbyAccess({ href, bg, message }) {
 
     return (
         <Link href={href} className={bg+" w-[300px] h-[500px] bg-cover bg-no-repeat bg-center decoration-naranja rounded-3xl hover:w-[400px] hover:h-[600px] transition-all duration-200 text-white"}>

@@ -27,7 +27,13 @@ module.exports = {
     extend: {
       backgroundImage: {
         "logo": "URL('/img/logo.png')",
-        "placeholder": "URL('/img/placeholder.png')"
+        "placeholder": "URL('/img/placeholder.png')",
+        "sign_languaje": "URL('/img/sign_languaje.jpg')",
+        "learn": "URL('/img/learn.jpg')",
+        "practice": "URL('/img/practice.jpg')",
+        "heart_sign": "URL('/img/heart_sign.jpg')",
+        "videocall": "URL('/img/videocall.jpg')",
+        "waiting_room": "URL('/img/waiting_room.jpg')"
       },
       brightness: {
         40: '.40',

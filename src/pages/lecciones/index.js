@@ -25,8 +25,8 @@ export default function LessonsPage({ initialSession, user, lecciones, porcentaj
         <Navigation session={initialSession} aqui={"lecciones"}/>
         <div className="flex flex-col gap-20 py-20 px-40">
             <div className="flex flex-col gap-4">
-                <h1 className="text-center">Titulo jijhikjhoijnoijhikjhnkjhkuhikjnlkho</h1>
-                <h2 className="text-center">Subtitulo okjhgkjfkhvkjnokjmnkhgkhjblk</h2>
+                <h2 className="text-center">Lecciones</h2>
+                <h3 className="text-center">Aprende sobre el lenguaje de señas</h3>
             </div>
             <div className="flex flex-row w-fit self-center gap-10 justify-center">
                 <Contenido lecciones={lecciones} user={user} porcentajes={porcentajes}/>

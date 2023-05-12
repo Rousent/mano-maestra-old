@@ -36,6 +36,9 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
 form {
   @apply h-fit flex flex-col gap-6 bg-fondo rounded-lg p-10;
 }
+p {
+  @apply text-left;
+}
 .buttonLike {
   @apply border-negro w-fit h-fit border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg hover:no-underline transition-all duration-150;
 }

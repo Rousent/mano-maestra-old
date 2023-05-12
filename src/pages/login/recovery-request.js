@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/router"
+import getURL from "@/utils/getURL"
 
 export default function request() {
     const supabase = useSupabaseClient()
@@ -12,7 +13,7 @@ export default function request() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: "http://localhost:3000/login/password-reset"})
+        const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: getURL("/login/password-reset") })
         if (error) {
             alert(error.message)
         } else {
@@ -21,7 +22,7 @@ export default function request() {
     }
 
     return (
-        <div className="w-full h-full bg-placeholder bg-no-repeat bg-cover bg-center">
+        <div className="w-full h-full bg-sign_languaje bg-no-repeat bg-cover bg-center">
             <div className="flex gap-40 w-full h-full justify-center items-center backdrop-brightness-40">
                 <form onSubmit={handleSubmit} className="w-form-thin">
                     <h2 className="text-center">Recuperar cuenta</h2>

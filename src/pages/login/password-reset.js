@@ -50,7 +50,7 @@ export default function recovery() {
     },[])
 
     return (
-        <div className="w-full h-full bg-placeholder bg-no-repeat bg-cover bg-center">
+        <div className="w-full h-full bg-sign_languaje bg-no-repeat bg-cover bg-center">
             <div className="flex gap-40 w-full h-full justify-center items-center backdrop-brightness-40">
                 <form onSubmit={handleSubmit} className="w-form-thin">
                     <h2 className="text-center">Cambiar contraseña</h2>

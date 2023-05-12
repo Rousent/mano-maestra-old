@@ -18,20 +18,19 @@ export default function CameraAccess() {
     }
 
     return (
-        <Camera/>
+        <Camera setCamera={setCamera}/>
     )
 }
 
-function Camera() {
+function Camera({ setCamera }) {
     const webcamRef = useRef(null)
     const canvasRef = useRef(null)
-    const [prediction, setPrediction] = useState()
+    const [prediction, setPrediction] = useState("Esperando a que cargue el modelo...")
 
     const gestures = [fp.Gestures.VictoryGesture, fp.Gestures.ThumbsUpGesture]
 
     const runHandpose = async () => {
         const net = await handpose.load()
-        console.log("Handpose model loaded.")
         const GE = new fp.GestureEstimator(gestures)
         setInterval(() => {
             detect(net, GE)
@@ -62,8 +61,8 @@ function Camera() {
                     const maxConfidence = confidence.indexOf(
                         Math.max.apply(null, confidence)
                     );
+                    //
                     setPrediction(gesture.gestures[maxConfidence].name);
-                    console.log(prediction);
                 }
             }
 
@@ -77,9 +76,13 @@ function Camera() {
     },[])
 
     return (
-        <div className="bg-gray-800 rounded-lg border-[5px] border-gray-800">
-            <Webcam ref={webcamRef} className="absolute rounded-lg mx-auto left-0 right-0 text-center w-fit h-fit"/>
-            <canvas ref={canvasRef} className="absolute mx-auto rounded-lg left-0 right-0 text-center w-fit h-fit"/>
+        <div className="bg-gray-800 rounded-lg border-[5px] border-gray-800 w-fit h-fit">
+            <button className="bg-blanco" onClick={() => setCamera(null)}>Cerrar</button>
+            <div className="relative">
+                <Webcam ref={webcamRef} className="rounded-lg mx-auto text-center w-fit h-fit"/>
+                <canvas ref={canvasRef} className="absolute z-10 mx-auto rounded-lg top-0 left-0 w-fit h-fit"/>
+            </div>
+            <div className="py-3 text-white font-medium text-lg">{prediction}</div>
         </div>
     )
 }
