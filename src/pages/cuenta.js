@@ -59,10 +59,10 @@ function ModificarDatos({ user }) {
             Object.assign(cambios, {nombres})
         }
         if (apellidoPaterno) {
-            Object.assign(cambios, {apellidoPaterno})
+            Object.assign(cambios, {apellido_paterno: apellidoPaterno})
         }
         if (apellidoMaterno) {
-            Object.assign(cambios, {apellidoMaterno})
+            Object.assign(cambios, {apellido_materno: apellidoMaterno})
         }
         if (Object.keys(cambios).length > 0) {
             const { error } = await supabase.from("perfiles").update(cambios).eq("id_usuario", user.id)
