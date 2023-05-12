@@ -1,5 +1,6 @@
 
 import Navigation from "@/components/Navigation";
+import Image from "next/image";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export default function Contacto({ initialSession }) {
@@ -10,7 +11,7 @@ export default function Contacto({ initialSession }) {
             <div className="flex flex-col w-full gap-5">
                 <h2 className="text-center font-bold text-6xl">Ofrecemos promociones y planes personalizados a empresas.</h2>
                 <h4 className="text-center font-medium text-3xl">Llena el formulario e incluye detalles de sus necesidades para llegar al mejor acuerdo.</h4>
-                <img src="img/logo.png" className="p-10"/>
+                <Image src="img/logo.png" fill={true} className="p-10"/>
             </div>
             <form className="w-form h-fit rounded-lg border-2 border-black p-10 flex flex-col justify-center items-center bg-fondo">
                 <div className="flex flex-col w-full">

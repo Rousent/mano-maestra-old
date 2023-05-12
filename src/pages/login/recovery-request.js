@@ -5,9 +5,8 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/router"
 import getURL from "@/utils/getURL"
 
-export default function request() {
+export default function Request() {
     const supabase = useSupabaseClient()
-    const router = useRouter()
 
     const [email,setEmail] = useState()
 

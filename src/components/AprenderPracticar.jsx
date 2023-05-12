@@ -1,10 +1,11 @@
 
 import Link from "next/link"
+import Image from "next/image"
 
 function SlideSection({ imagen, titulo, subtitulo, instruccion, direccion }) {
     return (
         <Link href={direccion} className="slideSection">
-            <img src={"/img/"+imagen} className="w-full h-full brightness-40 object-cover z-0"/>
+            <Image src={"/img/"+imagen} fill={true} className="w-full h-full brightness-40 object-cover z-0"/>
             <div className="z-10 overflow-clip flex flex-col gap-12 justify-center items-center w-full h-full inset-0 absolute">
                 <h2 className="text-6xl font-semibold text-fondo text-center">{titulo}</h2>
                 <p className="hidden opacity-0 text-4xl font-semibold text-fondo text-center transition-all duration-300">{subtitulo}</p>

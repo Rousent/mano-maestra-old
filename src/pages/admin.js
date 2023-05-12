@@ -6,7 +6,7 @@ import { useState } from "react"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import getURL from "@/utils/getURL"
 
-export default function admin({ initialSession, user }) {
+export default function Admin({ initialSession, user }) {
   const supabase = useSupabaseClient()
 
   const [nombres, setNombres] = useState()

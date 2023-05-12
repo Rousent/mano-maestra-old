@@ -10,7 +10,7 @@ export default function LessonContainer({ nivel, lecciones, indice, user, percen
 
     const desbloqueado = (indice <= user.valorNivel) ? true : false
     const icono = (percentage == 100) ? <BsCheckCircle className="w-10 h-10 mr-4"/> : (!desbloqueado) ? <FaLock className="w-8 h-8 mr-4"/> : (open) ? <FaChevronUp className="w-8 h-8 mr-4"/> : <FaChevronDown className="w-8 h-8 mr-4"/>
-    const lessons = (lecciones) ? lecciones.map((leccion) => (<Lesson idLeccion={leccion.id_leccion} titulo={leccion.titulo} done={leccion.done}/>)) : <div className="text-center">Ups, no hay nada aqui todavia...</div>
+    const lessons = (lecciones) ? lecciones.map((leccion) => (<Lesson key={leccion.id_leccion} idLeccion={leccion.id_leccion} titulo={leccion.titulo} done={leccion.done}/>)) : <div className="text-center">Ups, no hay nada aqui todavia...</div>
     const contenido = (open) ? lessons : null
     const porcentaje = (percentage == 100) ? "(Completado)" : (percentage >= 0) ? ("("+percentage+"% completado)") : null
 

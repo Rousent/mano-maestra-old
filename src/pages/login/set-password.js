@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { useState, useEffect } from "react"
 
-export default function set() {
+export default function Set() {
     const supabase = useSupabaseClient()
     const router = useRouter()
 
