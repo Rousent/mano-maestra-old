@@ -1,7 +1,6 @@
 
 import { useRouter } from "next/router"
 import Link from "next/link"
-import Image from "next/image"
 import { useState } from "react"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
@@ -36,7 +35,7 @@ export default function Login() {
     return (
         <div className="w-full h-full bg-sign_languaje bg-no-repeat bg-cover bg-center">
             <div className="flex gap-40 w-full h-full justify-center items-center backdrop-brightness-40">
-                <Image src="/img/logo.png" fill={true} className="w-1/3 h-fit"/>
+                <img src="/img/logo.png" fill={true} className="w-1/3 h-fit"/>
                 <form onSubmit={handleSubmit} className="w-form-thin">
                     <h2 className="text-center">Inicio de Sesión</h2>
                     <div className="flex flex-col gap-2">
