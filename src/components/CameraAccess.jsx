@@ -2,6 +2,7 @@
 import * as tf from "@tensorflow/tfjs"
 import * as handpose from "@tensorflow-models/handpose"
 import * as fp from "fingerpose"
+import { gestures } from "@/config/LSMGestures";
 import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 
@@ -27,8 +28,6 @@ function Camera({ setCamera }) {
     const canvasRef = useRef(null)
     const [prediction, setPrediction] = useState("Esperando a que cargue el modelo...")
 
-    const gestures = [fp.Gestures.VictoryGesture, fp.Gestures.ThumbsUpGesture]
-
     const runHandpose = async () => {
         const net = await handpose.load()
         const GE = new fp.GestureEstimator(gestures)
@@ -53,7 +52,7 @@ function Camera({ setCamera }) {
             const hand = await net.estimateHands(video)
 
             if (hand.length > 0) {
-                const gesture = await GE.estimate(hand[0].landmarks, 4);
+                const gesture = await GE.estimate(hand[0].landmarks, 7);
                 if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
                     const confidence = gesture.gestures.map(
                         (prediction) => prediction.score
@@ -61,9 +60,12 @@ function Camera({ setCamera }) {
                     const maxConfidence = confidence.indexOf(
                         Math.max.apply(null, confidence)
                     );
-                    //
                     setPrediction(gesture.gestures[maxConfidence].name);
+                } else {
+                    setPrediction("Espera...")
                 }
+            } else {
+                setPrediction("Coloque su mano frente a la camara.")
             }
 
             const ctx = canvasRef.current.getContext("2d")

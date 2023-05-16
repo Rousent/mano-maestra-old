@@ -5,7 +5,7 @@ import CameraAccess from "@/components/CameraAccess";
 
 export default function Page({ initialSession, user }) {
 
-    const titulo = "1. Abecedario"
+    const titulo = "1. Vocales"
 
     return (
         <LessonPageTemplate initialSession={initialSession} user={user} titulo={titulo} actual={"basico-1"} siguiente={"basico-2"}>
