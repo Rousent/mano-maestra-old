@@ -14,8 +14,8 @@ body {
   @apply h-full;
 }
 
-h1 { @apply text-5xl font-bold; }
-h2 { @apply text-4xl font-semibold; }
+h1 { @apply text-5xl font-bold text-center; }
+h2 { @apply text-4xl font-semibold text-center; }
 h3 { @apply text-3xl font-medium; }
 h4 { @apply text-2xl; }
 h5 { @apply text-xl; }
@@ -23,6 +23,9 @@ h6 { @apply text-lg; }
 
 a {
   @apply no-underline transition-all duration-150 hover:underline hover:text-lg;
+}
+ul {
+  @apply list-disc list-outside;
 }
 label {
   @apply w-full font-medium text-lg select-none;
@@ -36,8 +39,8 @@ input, input[type=text], input[type=password], input[type=email], input[type=tex
 form {
   @apply h-fit flex flex-col gap-6 bg-fondo rounded-lg p-10;
 }
-p {
-  @apply text-left;
+p, li {
+  @apply text-left text-lg;
 }
 .buttonLike {
   @apply border-negro w-fit h-fit border-solid border-2 rounded-lg px-5 py-1 hover:shadow-lg hover:text-lg hover:no-underline transition-all duration-150;

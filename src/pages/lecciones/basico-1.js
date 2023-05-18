@@ -10,11 +10,39 @@ export default function Page({ initialSession, user }) {
     return (
         <LessonPageTemplate initialSession={initialSession} user={user} titulo={titulo} actual={"basico-1"} siguiente={"basico-2"}>
             <h2>{titulo}</h2>
-            <h3>Subtitulo</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales nulla purus, ut molestie nisl dignissim eu. Vestibulum tempus sodales lacus facilisis efficitur. Nunc suscipit elit velit, sed dictum elit pellentesque id. Aliquam viverra gravida elit, quis facilisis mauris ultricies nec. Vestibulum porta scelerisque bibendum. Cras malesuada, magna ac cursus maximus, quam sem pretium mauris, quis commodo nisi mi in mi. Nunc mi est, posuere ut maximus id, molestie eu diam. Proin facilisis mi purus, quis pellentesque quam ultrices vitae. Nunc scelerisque semper efficitur. Etiam suscipit dictum mauris sed scelerisque. Fusce turpis arcu, dignissim nec nisl vitae, sodales pulvinar ex. Nam convallis nisl at sem tincidunt tincidunt. </p>
-            <h3>Subtitulo</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales nulla purus, ut molestie nisl dignissim eu. Vestibulum tempus sodales lacus facilisis efficitur. Nunc suscipit elit velit, sed dictum elit pellentesque id. Aliquam viverra gravida elit, quis facilisis mauris ultricies nec. Vestibulum porta scelerisque bibendum. Cras malesuada, magna ac cursus maximus, quam sem pretium mauris, quis commodo nisi mi in mi. Nunc mi est, posuere ut maximus id, molestie eu diam. Proin facilisis mi purus, quis pellentesque quam ultrices vitae. Nunc scelerisque semper efficitur. Etiam suscipit dictum mauris sed scelerisque. Fusce turpis arcu, dignissim nec nisl vitae, sodales pulvinar ex. Nam convallis nisl at sem tincidunt tincidunt. </p>
-            <h4>Pongamos a prueba el sistema:</h4>
+            <p>¡Bienvenidos a esta lección sobre las vocales en la Lengua de Señas Mexicana! En esta lección aprenderemos cómo se expresan las vocales a través de señas en LSM. Las vocales son componentes esenciales del lenguaje y su dominio nos permitirá comunicarnos de manera efectiva con las personas sordas y con discapacidad auditiva. ¡Comencemos!</p>
+            <h3>Vocal "A":</h3>
+            <ul>
+                <li>Posición inicial: Extiende la mano derecha hacia adelante con los dedos juntos y estirados.</li>
+                <li>Movimiento: Mantén los dedos juntos y cierra todos los dedos para que las puntas de los dedos toquen la palma de la mano.</li>
+                <li>Forma de la mano: Mantén los dedos cerrados y el pulgar extendido hacia afuera, alejado de la palma de la mano.</li>
+            </ul>
+            <h3>Vocal "E":</h3>
+            <ul>
+                <li>Posición inicial: Extiende la mano derecha hacia adelante con los dedos juntos y estirados.</li>
+                <li>Movimiento: Mantén la mano quieta y sin moverla.</li>
+                <li>Forma de la mano: Mantén los dedos semicerrados, es decir, dobla ligeramente los dedos en las articulaciones de las falanges media y distal. El pulgar se coloca debajo de los demás dedos.</li>
+            </ul>
+            <h3>Vocal "I":</h3>
+            <ul>
+                <li>Posición inicial: Extiende la mano derecha hacia adelante con los dedos juntos y estirados.</li>
+                <li>Movimiento: Mantén la mano quieta y sin moverla.</li>
+                <li>Forma de la mano: Cierra todos los dedos juntos, dejando solo el dedo índice extendido hacia arriba.</li>
+            </ul>
+            <h3>Vocal "O":</h3>
+            <ul>
+                <li>Posición inicial: Extiende la mano derecha hacia adelante con los dedos juntos y estirados.</li>
+                <li>Movimiento: Mantén la mano quieta y sin moverla.</li>
+                <li>Forma de la mano: Abre la mano con los dedos separados y ligeramente curvados, como si estuvieras sosteniendo una pelota imaginaria.</li>
+            </ul>
+            <h3>Vocal "U":</h3>
+            <ul>
+                <li>Posición inicial: Extiende la mano derecha hacia adelante con los dedos juntos y estirados.</li>
+                <li>Movimiento: Mantén la mano quieta y sin moverla.</li>
+                <li>Forma de la mano: Cierra el meñique y el anular, manteniéndolos juntos y doblados hacia adentro, hacia la palma de la mano. El dedo medio y el índice deben estar estirados hacia afuera. El pulgar debe tocar la punta del anular, sujetándolo suavemente.</li>
+            </ul>
+            <h3>¡Pongamoslo a prueba!</h3>
+            <p>Si tienes una camara, puedes utilizar el sistema de reconocimiento de señas. Enciende la camara e imita la forma de la mano para las vocales (A, E, I, O y U).</p>
             <CameraAccess/>
         </LessonPageTemplate>
     )

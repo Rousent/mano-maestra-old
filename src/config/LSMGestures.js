@@ -1,19 +1,6 @@
 
 import * as fp from "fingerpose"
 
-//F*ck You:
-const fckYouGesture = new fp.GestureDescription("Fuck You")
-fckYouGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.NoCurl)
-fckYouGesture.addDirection(fp.Finger.Middle, fp.FingerDirection.VerticalUp, 1.0)
-fckYouGesture.addDirection(fp.Finger.Middle, fp.FingerDirection.DiagonalUpRight, 0.9)
-fckYouGesture.addDirection(fp.Finger.Middle, fp.FingerDirection.DiagonalUpLeft, 0.9)
-// do this for all other fingers
-for(let finger of [fp.Finger.Index, fp.Finger.Thumb, fp.Finger.Ring, fp.Finger.Pinky]) {
-    fckYouGesture.addCurl(finger, fp.FingerCurl.FullCurl, 1.0);
-    fckYouGesture.addCurl(finger, fp.FingerCurl.HalfCurl, 0.9);
-}
-//
-
 const letra_A = new fp.GestureDescription("Letra A")
 letra_A.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl)
 letra_A.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalUp, 1.0)
