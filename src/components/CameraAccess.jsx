@@ -12,7 +12,7 @@ export default function CameraAccess() {
 
     if (!camera) {
         return (
-            <div className="grid grid-cols-1 bg-gray-800 rounded-lg mx-auto left-0 right-0 text-center w-[640px] h-[480px]">
+            <div className="grid grid-cols-1 bg-gray-800 rounded-lg mx-auto left-0 right-0 self-center text-center w-[640px] h-[480px]">
                 <button onClick={() => setCamera(true)} className="bg-blanco place-self-center">Abrir camara</button>
             </div>
         )
@@ -78,7 +78,7 @@ function Camera({ setCamera }) {
     },[])
 
     return (
-        <div className="bg-gray-800 rounded-lg border-[5px] border-gray-800 w-fit h-fit">
+        <div className="bg-gray-800 rounded-lg text-center self-center border-[5px] border-gray-800 w-fit h-fit">
             <button className="bg-blanco" onClick={() => setCamera(null)}>Cerrar</button>
             <div className="relative">
                 <Webcam ref={webcamRef} className="rounded-lg mx-auto text-center w-fit h-fit"/>
