@@ -15,7 +15,7 @@ export default function Page({ initialSession, user }) {
     const titulo = "1. Vocales"
 
     return (
-        <LessonPageTemplate initialSession={initialSession} user={user} titulo={titulo} actual={"basico-1"} siguiente={"basico-2"}>
+        <LessonPageTemplate initialSession={initialSession} user={user} titulo={titulo} actual={"basico-1"}>
             <h2>{titulo}</h2>
             <p>¡Bienvenidos a esta lección sobre las vocales en la Lengua de Señas Mexicana! En esta lección aprenderemos cómo se expresan las vocales a través de señas en LSM. Las vocales son componentes esenciales del lenguaje y su dominio nos permitirá comunicarnos de manera efectiva con las personas sordas y con discapacidad auditiva. ¡Comencemos!</p>
             <h3>Vocal A:</h3>
